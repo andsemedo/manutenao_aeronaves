@@ -1,0 +1,6 @@
+Id;modelo;ano_fabrico;capacidade;disponibilidade
+1;A330-900neo;2012;298;sim
+2;Airbus A330-200;2015;263;sim
+3;Airbus A321-200;2015;216;não
+4;Embraer 195;2010;118;não
+5;Boeing 737-800;2019;162;sim
