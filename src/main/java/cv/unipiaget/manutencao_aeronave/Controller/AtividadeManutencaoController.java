@@ -2,9 +2,8 @@ package cv.unipiaget.manutencao_aeronave.Controller;
 
 import cv.unipiaget.manutencao_aeronave.Entities.AtividadeManutencaoEntity;
 import cv.unipiaget.manutencao_aeronave.Services.AtividadeManutencaoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +25,11 @@ public class AtividadeManutencaoController {
     public List<AtividadeManutencaoEntity> obterTodasManutencao() {
         return atividadeManutencaoService.obterTodasManutencao();
     }
+
+    @PostMapping
+    public ResponseEntity<Object> adicionarNovaManutencao(@RequestBody AtividadeManutencaoEntity manutencaoEntity) {
+        return atividadeManutencaoService.adicionarNovaManutencao(manutencaoEntity);
+    }
+
 
 }

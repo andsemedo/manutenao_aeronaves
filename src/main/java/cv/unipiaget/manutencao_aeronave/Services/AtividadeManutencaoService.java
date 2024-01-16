@@ -4,6 +4,8 @@ import cv.unipiaget.manutencao_aeronave.Entities.AtividadeManutencaoEntity;
 import cv.unipiaget.manutencao_aeronave.Enums.StatusManutencaoEnum;
 import cv.unipiaget.manutencao_aeronave.Repository.AtividadeManutencaoRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,17 +18,27 @@ import java.util.List;
 public class AtividadeManutencaoService {
 
     public final AtividadeManutencaoRepository atividadeManutencaoRepository;
+    public final GestaoVooMockService gestaoVooMockService;
 
-    public AtividadeManutencaoService(AtividadeManutencaoRepository atividadeManutencaoRepository) {
+    public AtividadeManutencaoService(AtividadeManutencaoRepository atividadeManutencaoRepository, GestaoVooMockService gestaoVooMockService) {
         this.atividadeManutencaoRepository = atividadeManutencaoRepository;
+        this.gestaoVooMockService = gestaoVooMockService;
     }
 
     public List<AtividadeManutencaoEntity> obterTodasManutencao() {
         return atividadeManutencaoRepository.findAll();
     }
 
-    public void adicionarNovaManutencao(AtividadeManutencaoEntity manutencaoEntity) {
-        atividadeManutencaoRepository.save(manutencaoEntity);
+    public ResponseEntity<Object> adicionarNovaManutencao(AtividadeManutencaoEntity manutencaoEntity) {
+        //verificar disponibilidade de aeronave
+        String disponibilidade = gestaoVooMockService.verificarDisponibilidadeAeronave(manutencaoEntity.getIdAeronave());
+        if(disponibilidade.equals("não")) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Aeronave não disponivel");
+        } else if (disponibilidade.equals("sim")) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(atividadeManutencaoRepository.save(manutencaoEntity));
+        }
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Aeronave não encontrado");
     }
 
     public void deletarManutencao(Long idManutencao) {

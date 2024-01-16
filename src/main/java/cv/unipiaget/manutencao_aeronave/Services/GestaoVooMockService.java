@@ -17,8 +17,10 @@ public class GestaoVooMockService {
     public String verificarDisponibilidadeAeronave(int idAeronave) {
         if(idAeronave == 1 || idAeronave == 4 || idAeronave == 5) {
             return "sim";
+        } else if (idAeronave == 2 || idAeronave == 3 || idAeronave == 6) {
+            return "não";
         }
-        return "não";
+        return "aeronave não encontrado";
     }
 
     public String obterRequisitosManutencaoAeronave(int idAeronave) {
