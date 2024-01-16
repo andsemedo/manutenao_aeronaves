@@ -3,6 +3,7 @@ package cv.unipiaget.manutencao_aeronave.Services;
 import cv.unipiaget.manutencao_aeronave.Entities.AtividadeManutencaoEntity;
 import cv.unipiaget.manutencao_aeronave.Enums.StatusManutencaoEnum;
 import cv.unipiaget.manutencao_aeronave.Repository.AtividadeManutencaoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,6 +35,7 @@ public class AtividadeManutencaoService {
         }
     }
 
+    @Transactional
     public void atualizarManutencao(Long idManutencao, StatusManutencaoEnum status, String descricao) {
         AtividadeManutencaoEntity manutencaoEntity = atividadeManutencaoRepository.findById(idManutencao)
                 .orElseThrow( () -> new IllegalStateException(
