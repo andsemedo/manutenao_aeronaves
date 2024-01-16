@@ -3,8 +3,9 @@ package cv.unipiaget.manutencao_aeronave.classes;
 
 import jakarta.persistence.Entity;
 
-@Entity
+
 public class UsoPeca {
+
     private int id_peca;
     private int id_registro;
     private int qtd_utilizado;
