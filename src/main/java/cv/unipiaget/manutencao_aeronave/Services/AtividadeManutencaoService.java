@@ -2,6 +2,7 @@ package cv.unipiaget.manutencao_aeronave.Services;
 
 import cv.unipiaget.manutencao_aeronave.Entities.AtividadeManutencaoEntity;
 import cv.unipiaget.manutencao_aeronave.Enums.StatusManutencaoEnum;
+import cv.unipiaget.manutencao_aeronave.GestaoVooSimulate.GestaoVooMockService;
 import cv.unipiaget.manutencao_aeronave.Repository.AtividadeManutencaoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
@@ -31,14 +32,12 @@ public class AtividadeManutencaoService {
 
     public ResponseEntity<Object> adicionarNovaManutencao(AtividadeManutencaoEntity manutencaoEntity) {
         //verificar disponibilidade de aeronave
-        String disponibilidade = gestaoVooMockService.verificarDisponibilidadeAeronave(manutencaoEntity.getIdAeronave());
-        if(disponibilidade.equals("não")) {
+        Boolean disponibilidade = gestaoVooMockService.verificarDisponibilidade(manutencaoEntity.getIdAeronave());
+        if(!disponibilidade) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Aeronave não disponivel");
-        } else if (disponibilidade.equals("sim")) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(atividadeManutencaoRepository.save(manutencaoEntity));
         }
+        return ResponseEntity.status(HttpStatus.CREATED).body(atividadeManutencaoRepository.save(manutencaoEntity));
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Aeronave não encontrado");
     }
 
     public void deletarManutencao(Long idManutencao) {
