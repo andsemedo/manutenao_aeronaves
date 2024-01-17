@@ -1,13 +1,19 @@
-package cv.unipiaget.manutencao_aeronave.classes;
+package cv.unipiaget.manutencao_aeronave.Entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.util.Date;
 
+/**
+ * @Silvino Gomes
+ * @Date 17/01/2024
+ */
 
 @Entity
-public class EncomendaPeca {
+@Table(name = "tbl_encomenda_pecas")
+public class EncomendaPecaEntity {
     @Id
     private int id_encomendaPeca;
     private int quantidade;
@@ -16,7 +22,7 @@ public class EncomendaPeca {
     private int id_peca;
 
 
-    public EncomendaPeca(int id_encomendaPeca, int quantidade, Date data_encomenda, String status, int id_peca) {
+    public EncomendaPecaEntity(int id_encomendaPeca, int quantidade, Date data_encomenda, String status, int id_peca) {
         this.id_encomendaPeca = id_encomendaPeca;
         this.quantidade = quantidade;
         this.data_encomenda = data_encomenda;
