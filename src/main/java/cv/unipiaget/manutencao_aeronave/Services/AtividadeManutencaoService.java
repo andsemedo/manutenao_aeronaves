@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Anderson Semedo
@@ -26,11 +27,11 @@ public class AtividadeManutencaoService {
         this.gestaoVooMockService = gestaoVooMockService;
     }
 
-    public List<AtividadeManutencaoEntity> obterTodasManutencao() {
+    public List<AtividadeManutencaoEntity> getAllManutencao() {
         return atividadeManutencaoRepository.findAll();
     }
 
-    public ResponseEntity<Object> adicionarNovaManutencao(AtividadeManutencaoEntity manutencaoEntity) {
+    public ResponseEntity<Object> addNewManutencao(AtividadeManutencaoEntity manutencaoEntity) {
         //verificar disponibilidade de aeronave
         Boolean disponibilidade = gestaoVooMockService.verificarDisponibilidade(manutencaoEntity.getIdAeronave());
         if(!disponibilidade) {
@@ -40,17 +41,27 @@ public class AtividadeManutencaoService {
 
     }
 
-    public void deletarManutencao(Long idManutencao) {
-        if(!atividadeManutencaoRepository.existsById(idManutencao)) {
-            throw new IllegalStateException("Manutenção com o " + idManutencao + " não existe");
+    public AtividadeManutencaoEntity getManutencaoById(Long idManutencao) {
+        Optional<AtividadeManutencaoEntity> manutencao = atividadeManutencaoRepository.findById(idManutencao);
+        if(manutencao.isEmpty()) {
+            return null;
         }
+        return manutencao.get();
     }
 
+    public void deleteManutencao(Long idManutencao) {
+        if(!atividadeManutencaoRepository.existsById(idManutencao)) {
+            throw new IllegalStateException("Manutenção com o id " + idManutencao + " não existe");
+        }
+        atividadeManutencaoRepository.deleteById(idManutencao);
+    }
+
+    // TODO
     @Transactional
     public void atualizarManutencao(Long idManutencao, StatusManutencaoEnum status, String descricao) {
         AtividadeManutencaoEntity manutencaoEntity = atividadeManutencaoRepository.findById(idManutencao)
                 .orElseThrow( () -> new IllegalStateException(
-                        "Manutenção com o " + idManutencao + " não existe"
+                        "Manutenção com o id " + idManutencao + " não existe"
                 ));
 
         if(status != null) {
