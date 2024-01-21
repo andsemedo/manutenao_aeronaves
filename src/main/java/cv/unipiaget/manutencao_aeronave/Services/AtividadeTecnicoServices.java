@@ -36,7 +36,7 @@ public class AtividadeTecnicoServices {
 //-------------------------------------------------
 //Create Tecnico
 //-------------------------------------------------
-    public AtividadeTecnicoEntities addnewTecnico(AtividadeTecnicoEntities tecnico){
+    public AtividadeTecnicoEntities addNewTecnico(AtividadeTecnicoEntities tecnico){
         return atividadeTecnicoRepository.save(tecnico);
     }
 

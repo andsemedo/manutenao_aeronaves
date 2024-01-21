@@ -12,16 +12,22 @@ public class AtividadeTecnicoEntities {
     private long idTecnico;
     private String nomeTecnico;
     private AtividadeTecnicoEnum cargo;
-    private long idEequipa;
+    private long id_Equipa;
 
     public AtividadeTecnicoEntities(){
     }
 
-    public AtividadeTecnicoEntities(long idTecnico, String nomeTecnico, AtividadeTecnicoEnum cargo, long idEequipa) {
+    public AtividadeTecnicoEntities(long idTecnico, String nomeTecnico, AtividadeTecnicoEnum cargo, long id_Equipa) {
         this.idTecnico = idTecnico;
         this.nomeTecnico = nomeTecnico;
         this.cargo = cargo;
-        this.idEequipa = idEequipa;
+        this.id_Equipa = id_Equipa;
+    }
+
+    public AtividadeTecnicoEntities(String nomeTecnico, AtividadeTecnicoEnum cargo, long id_Equipa) {
+        this.nomeTecnico = nomeTecnico;
+        this.cargo = cargo;
+        this.id_Equipa = id_Equipa;
     }
 
     public long getIdTecnico() {
@@ -48,11 +54,11 @@ public class AtividadeTecnicoEntities {
         this.cargo = cargo;
     }
 
-    public long getIdEequipa() {
-        return idEequipa;
+    public long getId_Equipa() {
+        return id_Equipa;
     }
 
-    public void setIdEequipa(long idEequipa) {
-        this.idEequipa = idEequipa;
+    public void setId_Equipa(long id_Equipa) {
+        this.id_Equipa = id_Equipa;
     }
 }
