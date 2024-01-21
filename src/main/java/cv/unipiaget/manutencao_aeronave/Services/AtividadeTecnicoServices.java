@@ -19,7 +19,7 @@ public class AtividadeTecnicoServices {
 //-------------------------------------------------
 //    Listar tecnico
 //-------------------------------------------------
-     public List<AtividadeTecnicoEntities> getTecnico() {
+     public List<AtividadeTecnicoEntities> getAllTecnico() {
          return atividadeTecnicoRepository.findBy();
     }
 
@@ -36,18 +36,16 @@ public class AtividadeTecnicoServices {
 //-------------------------------------------------
 //Create Tecnico
 //-------------------------------------------------
-    public void createTecnico(long idTecnico, String nome, AtividadeTecnicoEnum status, long idEequipa){
-            long id = idTecnico.getIdTecnico();
-            String nome = nomeTecnico.getNomeTecnico();
-            AtividadeTecnicoEnum status = status.getStatus();
-            long idequipa = idEequipa.getIdEquipa;
+    public AtividadeTecnicoEntities addnewTecnico(AtividadeTecnicoEntities tecnico){
+        return atividadeTecnicoRepository.save(tecnico);
+    }
 
-            if(idTecnico == atividadeTecnicoRepository.findBy()){
-                System.out.println("Esse técnico ja existe.");
-            }
-            else {
-
-            }
+    public AtividadeTecnicoEntities getTecnicoById(Long id) {
+        Optional<AtividadeTecnicoEntities> tecnico = atividadeTecnicoRepository.findById(id);
+        if (tecnico.isEmpty()) {
+            return null;
+        }
+        return tecnico.get();
     }
 
 
