@@ -20,24 +20,18 @@ import java.util.Optional;
 public class AtividadeManutencaoService {
 
     public final AtividadeManutencaoRepository atividadeManutencaoRepository;
-    public final GestaoVooMockService gestaoVooMockService;
 
-    public AtividadeManutencaoService(AtividadeManutencaoRepository atividadeManutencaoRepository, GestaoVooMockService gestaoVooMockService) {
+    public AtividadeManutencaoService(AtividadeManutencaoRepository atividadeManutencaoRepository) {
         this.atividadeManutencaoRepository = atividadeManutencaoRepository;
-        this.gestaoVooMockService = gestaoVooMockService;
     }
 
     public List<AtividadeManutencaoEntity> getAllManutencao() {
         return atividadeManutencaoRepository.findAll();
     }
 
-    public ResponseEntity<Object> addNewManutencao(AtividadeManutencaoEntity manutencaoEntity) {
-        //verificar disponibilidade de aeronave
-        Boolean disponibilidade = gestaoVooMockService.verificarDisponibilidade(manutencaoEntity.getIdAeronave());
-        if(!disponibilidade) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Aeronave não disponivel");
-        }
-        return ResponseEntity.status(HttpStatus.CREATED).body(atividadeManutencaoRepository.save(manutencaoEntity));
+    public AtividadeManutencaoEntity addNewManutencao(AtividadeManutencaoEntity manutencaoEntity) {
+
+        return atividadeManutencaoRepository.save(manutencaoEntity);
 
     }
 
@@ -50,16 +44,13 @@ public class AtividadeManutencaoService {
     }
 
     public void deleteManutencao(Long idManutencao) {
-        if(!atividadeManutencaoRepository.existsById(idManutencao)) {
-            throw new IllegalStateException("Manutenção com o id " + idManutencao + " não existe");
-        }
+
         atividadeManutencaoRepository.deleteById(idManutencao);
     }
 
-    // TODO
     @Transactional
-    public void atualizarManutencao(Long idManutencao, StatusManutencaoEnum status, String descricao) {
-        AtividadeManutencaoEntity manutencaoEntity = atividadeManutencaoRepository.findById(idManutencao)
+    public AtividadeManutencaoEntity updateManutencao(AtividadeManutencaoEntity manutencaoEntity) {
+        /*AtividadeManutencaoEntity manutencaoEntity = atividadeManutencaoRepository.findById(idManutencao)
                 .orElseThrow( () -> new IllegalStateException(
                         "Manutenção com o id " + idManutencao + " não existe"
                 ));
@@ -69,9 +60,9 @@ public class AtividadeManutencaoService {
         }
         if(descricao != null) {
             manutencaoEntity.setDescricao(descricao);
-        }
+        }*/
 
-        atividadeManutencaoRepository.save(manutencaoEntity);
+        return atividadeManutencaoRepository.save(manutencaoEntity);
 
     }
 

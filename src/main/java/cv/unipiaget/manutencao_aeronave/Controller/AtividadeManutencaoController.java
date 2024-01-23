@@ -1,6 +1,7 @@
 package cv.unipiaget.manutencao_aeronave.Controller;
 
 import cv.unipiaget.manutencao_aeronave.Entities.AtividadeManutencaoEntity;
+import cv.unipiaget.manutencao_aeronave.GestaoVooSimulate.GestaoVooMockService;
 import cv.unipiaget.manutencao_aeronave.Services.AtividadeManutencaoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +15,15 @@ import java.util.Optional;
  * @Date 16/01/2024
  */
 @RestController
-@RequestMapping(path = "/api/manutencao")
+@RequestMapping(path = "/api/manutencao/atividade/")
 public class AtividadeManutencaoController {
 
     public final AtividadeManutencaoService atividadeManutencaoService;
+    private final GestaoVooMockService gestaoVooMockService;
 
-    public AtividadeManutencaoController(AtividadeManutencaoService atividadeManutencaoService) {
+    public AtividadeManutencaoController(AtividadeManutencaoService atividadeManutencaoService, GestaoVooMockService gestaoVooMockService) {
         this.atividadeManutencaoService = atividadeManutencaoService;
+        this.gestaoVooMockService = gestaoVooMockService;
     }
 
     @GetMapping
@@ -39,7 +42,29 @@ public class AtividadeManutencaoController {
 
     @PostMapping
     public ResponseEntity<Object> addNewManutencao(@RequestBody AtividadeManutencaoEntity manutencaoEntity) {
-        return atividadeManutencaoService.addNewManutencao(manutencaoEntity);
+        //verificar disponibilidade de aeronave
+        Boolean disponibilidade = gestaoVooMockService.verificarDisponibilidade(manutencaoEntity.getIdAeronave());
+        if(!disponibilidade) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Aeronave não disponivel");
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(atividadeManutencaoService.addNewManutencao(manutencaoEntity));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateManutencao(@PathVariable("id") Long id, @RequestBody AtividadeManutencaoEntity manutencaoEntity) {
+        AtividadeManutencaoEntity atividadeManutencao = atividadeManutencaoService.getManutencaoById(id);
+        if(atividadeManutencao == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Atividade manutenção com o id "+id+" não encontrada");
+        }
+
+        if (manutencaoEntity.getStatusManutencao() != null) {
+            atividadeManutencao.setStatusManutencao(manutencaoEntity.getStatusManutencao());
+        }
+        if (manutencaoEntity.getDescricao() != null) {
+            atividadeManutencao.setDescricao(manutencaoEntity.getDescricao());
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(atividadeManutencaoService.updateManutencao(atividadeManutencao));
     }
 
     @DeleteMapping("/{id}")

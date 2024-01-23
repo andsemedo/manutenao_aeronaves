@@ -4,6 +4,7 @@ import cv.unipiaget.manutencao_aeronave.Enums.StatusManutencaoEnum;
 import cv.unipiaget.manutencao_aeronave.Enums.TipoManutencaoEnum;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -21,12 +22,12 @@ public class AtividadeManutencaoEntity {
     private String descricao;
     private StatusManutencaoEnum statusManutencao;
     private int idAeronave;
-    private Date data;
+    private LocalDate data;
 
     public AtividadeManutencaoEntity() {
     }
 
-    public AtividadeManutencaoEntity(TipoManutencaoEnum tipoManutencao, String descricao, StatusManutencaoEnum statusManutencao, int idAeronav, Date data) {
+    public AtividadeManutencaoEntity(TipoManutencaoEnum tipoManutencao, String descricao, StatusManutencaoEnum statusManutencao, int idAeronav, LocalDate data) {
         this.tipoManutencao = tipoManutencao;
         this.descricao = descricao;
         this.statusManutencao = statusManutencao;
@@ -34,7 +35,7 @@ public class AtividadeManutencaoEntity {
         this.data = data;
     }
 
-    public AtividadeManutencaoEntity(Long id, TipoManutencaoEnum tipoManutencao, String descricao, StatusManutencaoEnum statusManutencao, int idAeronave, Date data) {
+    public AtividadeManutencaoEntity(Long id, TipoManutencaoEnum tipoManutencao, String descricao, StatusManutencaoEnum statusManutencao, int idAeronave, LocalDate data) {
         this.id = id;
         this.tipoManutencao = tipoManutencao;
         this.descricao = descricao;
@@ -83,11 +84,11 @@ public class AtividadeManutencaoEntity {
         this.idAeronave = idAeronave;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 }

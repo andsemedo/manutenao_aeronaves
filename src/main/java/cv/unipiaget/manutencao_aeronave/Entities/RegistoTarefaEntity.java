@@ -19,25 +19,25 @@ public class RegistoTarefaEntity {
     @Column(name = "data_exucucao")
     private LocalDate data_execucao;
     private String comentario;
-    private int atividadeManutencao;
-    private int id_uso_peca;
+    private Long atividadeManutencao;
+    private Long id_equipa;
 
     public RegistoTarefaEntity() {
     }
 
-    public RegistoTarefaEntity(LocalDate data_execucao, String comentario, int atividadeManutencao, int id_uso_peca) {
+    public RegistoTarefaEntity(LocalDate data_execucao, String comentario, Long atividadeManutencao, Long id_equipa) {
         this.data_execucao = data_execucao;
         this.comentario = comentario;
         this.atividadeManutencao = atividadeManutencao;
-        this.id_uso_peca = id_uso_peca;
+        this.id_equipa = id_equipa;
     }
 
-    public RegistoTarefaEntity(Long id, LocalDate data_execucao, String comentario, int atividadeManutencao, int id_uso_peca) {
+    public RegistoTarefaEntity(Long id, LocalDate data_execucao, String comentario, Long atividadeManutencao, Long id_equipa) {
         this.id = id;
         this.data_execucao = data_execucao;
         this.comentario = comentario;
         this.atividadeManutencao = atividadeManutencao;
-        this.id_uso_peca = id_uso_peca;
+        this.id_equipa = id_equipa;
     }
 
     public Long getId() {
@@ -64,19 +64,19 @@ public class RegistoTarefaEntity {
         this.comentario = comentario;
     }
 
-    public int getAtividadeManutencao() {
+    public Long getAtividadeManutencao() {
         return atividadeManutencao;
     }
 
-    public void setAtividadeManutencao(int atividadeManutencao) {
+    public void setAtividadeManutencao(Long atividadeManutencao) {
         this.atividadeManutencao = atividadeManutencao;
     }
 
-    public int getId_uso_peca() {
-        return id_uso_peca;
+    public Long getId_equipa() {
+        return id_equipa;
     }
 
-    public void setId_uso_peca(int id_uso_peca) {
-        this.id_uso_peca = id_uso_peca;
+    public void setId_equipa(Long id_equipa) {
+        this.id_equipa = id_equipa;
     }
 }
