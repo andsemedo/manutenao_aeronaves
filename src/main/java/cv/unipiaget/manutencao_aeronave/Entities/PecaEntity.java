@@ -1,9 +1,7 @@
 package cv.unipiaget.manutencao_aeronave.Entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 
 /**
@@ -16,23 +14,32 @@ import jakarta.persistence.Table;
 public class PecaEntity {
 
     @Id
-    private int id_peca;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id_peca;
     private String nome;
     private int quantidade;
 
 
-    public PecaEntity(int id_peca, String nome, int quantidade, String status) {
+
+    public PecaEntity() {
+
+    }
+
+/*
+    public PecaEntity(long id_peca, String nome, int quantidade, String status) {
         this.id_peca = id_peca;
         this.nome = nome;
         this.quantidade = quantidade;
     }
 
+ */
+
     // Getters e Setters
-    public int getId() {
+    public long getId() {
         return id_peca;
     }
 
-    public void setId(int id_peca) {
+    public void setId(long id_peca) {
         this.id_peca = id_peca;
     }
 

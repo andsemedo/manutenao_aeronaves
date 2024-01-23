@@ -1,43 +1,61 @@
-package cv.unipiaget.manutencao_aeronave.Entities;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-
 /**
- * @Silvino Gomes
+ * @author Silvino Gomes
  * @Date 17/01/2024
  */
+
+package cv.unipiaget.manutencao_aeronave.Entities;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "tbl_uso_pecas")
 public class UsoPecaEntity {
 
-    private int id_peca;
-    private int id_registro;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_peca_uso;
+
+    @ManyToOne
+    @JoinColumn(name = "id_peca", referencedColumnName = "id_peca")
+    private PecaEntity peca;
+
+    @ManyToOne
+    @JoinColumn(name = "atividade_manutencao_id", referencedColumnName = "id")
+    private AtividadeManutencaoEntity atividadeManutencao;
+
     private int qtd_utilizado;
 
+    public UsoPecaEntity() {
+    }
 
-    public UsoPecaEntity(int id_peca, int id_registro, int qtd_utilizado) {
-        this.id_peca = id_peca;
-        this.id_registro = id_registro;
+    public UsoPecaEntity(PecaEntity peca, AtividadeManutencaoEntity atividadeManutencao, int qtd_utilizado) {
+        this.peca = peca;
+        this.atividadeManutencao = atividadeManutencao;
         this.qtd_utilizado = qtd_utilizado;
     }
 
-
-    public int getIdPeca() {
-        return id_peca;
+    public Long getIdPecaUso() {
+        return id_peca_uso;
     }
 
-    public void setIdPeca(int id_peca) {
-        this.id_peca = id_peca;
+    public void setIdPecaUso(Long id_peca_uso) {
+        this.id_peca_uso = id_peca_uso;
     }
 
-    public int getIdRegistro() {
-        return id_registro;
+    public PecaEntity getPeca() {
+        return peca;
     }
 
-    public void setIdRegistro(int idRegistro) {
-        this.id_registro = idRegistro;
+    public void setPeca(PecaEntity peca) {
+        this.peca = peca;
+    }
+
+    public AtividadeManutencaoEntity getAtividadeManutencao() {
+        return atividadeManutencao;
+    }
+
+    public void setAtividadeManutencao(AtividadeManutencaoEntity atividadeManutencao) {
+        this.atividadeManutencao = atividadeManutencao;
     }
 
     public int getQtdUtilizado() {

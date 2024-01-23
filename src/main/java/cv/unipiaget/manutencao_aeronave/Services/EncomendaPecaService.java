@@ -1,3 +1,8 @@
+/**
+ * @author Silvino Gomes
+ * @Date 22/01/2024
+ */
+
 package cv.unipiaget.manutencao_aeronave.Services;
 
 import cv.unipiaget.manutencao_aeronave.Entities.EncomendaPecaEntity;
@@ -10,7 +15,6 @@ import java.util.Optional;
 
 @Service
 public class EncomendaPecaService {
-
     private final EncomendaPecaRepository encomendaPecaRepository;
 
     @Autowired
@@ -18,21 +22,25 @@ public class EncomendaPecaService {
         this.encomendaPecaRepository = encomendaPecaRepository;
     }
 
-    public List<EncomendaPecaEntity> listarTodasEncomendasPecas() {
+    public List<EncomendaPecaEntity> listarTodas() {
         return encomendaPecaRepository.findAll();
     }
 
-    public Optional<EncomendaPecaEntity> obterEncomendaPecaPorId(int id) {
-        return encomendaPecaRepository.findById(id);
+    public EncomendaPecaEntity obterPorId(int id) {
+        Optional<EncomendaPecaEntity> encomendaOptional = encomendaPecaRepository.findById(id);
+        return encomendaOptional.orElse(null);
     }
 
-    public EncomendaPecaEntity salvarEncomendaPeca(EncomendaPecaEntity encomendaPeca) {
-        return encomendaPecaRepository.save(encomendaPeca);
+    public EncomendaPecaEntity adicionarEncomenda(EncomendaPecaEntity encomenda) {
+        return encomendaPecaRepository.save(encomenda);
     }
 
-    public void excluirEncomendaPeca(int id) {
+    public EncomendaPecaEntity atualizarEncomenda(long id, EncomendaPecaEntity encomenda) {
+        encomenda.setIdEncomendaPeca(id);
+        return encomendaPecaRepository.save(encomenda);
+    }
+
+    public void excluirEncomenda(int id) {
         encomendaPecaRepository.deleteById(id);
     }
-
-
 }

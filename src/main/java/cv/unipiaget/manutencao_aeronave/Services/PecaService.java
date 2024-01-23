@@ -9,7 +9,7 @@ package cv.unipiaget.manutencao_aeronave.Services;
 import cv.unipiaget.manutencao_aeronave.Entities.PecaEntity;
 import cv.unipiaget.manutencao_aeronave.Entities.UsoPecaEntity;
 import cv.unipiaget.manutencao_aeronave.Repository.PecaRepository;
-import cv.unipiaget.manutencao_aeronave.Repository.UsoPecaEntityRepository;
+import cv.unipiaget.manutencao_aeronave.Repository.UsoPecaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -19,12 +19,10 @@ import java.util.Optional;
 public class PecaService {
 
     private final PecaRepository pecaRepository;
-    private final UsoPecaEntityRepository UsoPecaEntityRepository;
 
     @Autowired
-    public PecaService(PecaRepository pecaRepository, cv.unipiaget.manutencao_aeronave.Repository.UsoPecaEntityRepository usoPecaEntityRepository) {
+    public PecaService(PecaRepository pecaRepository) {
         this.pecaRepository = pecaRepository;
-        UsoPecaEntityRepository = usoPecaEntityRepository;
     }
 
     public List<PecaEntity> listarTodasPecas() {
@@ -43,13 +41,6 @@ public class PecaService {
         pecaRepository.deleteById(id);
     }
 
-    // OBS: Falta a de adcionar
 
-
-
-    // Uso de Pecas
-    public List<UsoPecaEntity> listarPecasEmUso() {
-        return UsoPecaEntityRepository.findAll();
-    }
 
 }

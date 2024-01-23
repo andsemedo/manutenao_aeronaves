@@ -22,7 +22,5 @@ services:
       - "8172:80"
     depends_on:
       - postgres_manutencao
-
-
 volumes:
   postgres_manutencao_data:

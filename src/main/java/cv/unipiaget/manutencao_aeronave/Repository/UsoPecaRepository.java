@@ -8,7 +8,7 @@ package cv.unipiaget.manutencao_aeronave.Repository;
 import cv.unipiaget.manutencao_aeronave.Entities.UsoPecaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UsoPecaEntityRepository extends JpaRepository<UsoPecaEntity, Long> {
+public interface UsoPecaRepository extends JpaRepository<UsoPecaEntity, Long> {
 
 
 }

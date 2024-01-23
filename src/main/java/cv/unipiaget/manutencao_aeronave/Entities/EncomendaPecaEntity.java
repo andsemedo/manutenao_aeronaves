@@ -1,8 +1,6 @@
 package cv.unipiaget.manutencao_aeronave.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -15,14 +13,23 @@ import java.util.Date;
 @Table(name = "tbl_encomenda_pecas")
 public class EncomendaPecaEntity {
     @Id
-    private int id_encomendaPeca;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_encomendaPeca;
     private int quantidade;
     private Date data_encomenda;
     private String status;
+
+
+    // Falta chave estranjeira para ligar a tabela pecas
     private int id_peca;
 
 
-    public EncomendaPecaEntity(int id_encomendaPeca, int quantidade, Date data_encomenda, String status, int id_peca) {
+    public EncomendaPecaEntity() {
+
+    }
+
+
+    public EncomendaPecaEntity(Long id_encomendaPeca, int quantidade, Date data_encomenda, String status, int id_peca) {
         this.id_encomendaPeca = id_encomendaPeca;
         this.quantidade = quantidade;
         this.data_encomenda = data_encomenda;
@@ -32,11 +39,11 @@ public class EncomendaPecaEntity {
 
 
 
-    public int getIdEncomendaPeca() {
+    public Long getIdEncomendaPeca() {
         return id_encomendaPeca;
     }
 
-    public void setIdEncomendaPeca(int id_encomendaPeca) {
+    public void setIdEncomendaPeca(Long id_encomendaPeca) {
         this.id_encomendaPeca = id_encomendaPeca;
     }
 
