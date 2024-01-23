@@ -1,10 +1,13 @@
 package cv.unipiaget.manutencao_aeronave.Config;
 
+import cv.unipiaget.manutencao_aeronave.Entities.AtividadeEquipaEntities;
 import cv.unipiaget.manutencao_aeronave.Entities.AtividadeManutencaoEntity;
 import cv.unipiaget.manutencao_aeronave.Entities.RegistoTarefaEntity;
 import cv.unipiaget.manutencao_aeronave.Enums.StatusManutencaoEnum;
 import cv.unipiaget.manutencao_aeronave.Enums.TipoManutencaoEnum;
+import cv.unipiaget.manutencao_aeronave.Repository.AtividadeEquipaRepository;
 import cv.unipiaget.manutencao_aeronave.Repository.AtividadeManutencaoRepository;
+import cv.unipiaget.manutencao_aeronave.Repository.RegistoTarefaRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,11 +41,11 @@ public class AtividadeManutencaoConfig {
     }
 
     @Bean
-    CommandLineRunner commandLineRunnerEquipa(EquipaRepository equipaRepository) {
+    CommandLineRunner commandLineRunnerEquipa(AtividadeEquipaRepository equipaRepository) {
         return args -> {
-            EquipaEntity equipa = new EquipaEntity("supa");
-            EquipaEntity equipa1 = new EquipaEntity("strikas");
-            EquipaEntity equipa2 = new EquipaEntity("powa");
+            AtividadeEquipaEntities equipa = new AtividadeEquipaEntities("supa");
+            AtividadeEquipaEntities equipa1 = new AtividadeEquipaEntities("strikas");
+            AtividadeEquipaEntities equipa2 = new AtividadeEquipaEntities("powa");
 
             equipaRepository.saveAll(
                     List.of(equipa, equipa1, equipa2)

@@ -7,7 +7,6 @@ package cv.unipiaget.manutencao_aeronave.Controller;
  */
 
 import cv.unipiaget.manutencao_aeronave.Entities.PecaEntity;
-import cv.unipiaget.manutencao_aeronave.Entities.UsoPecaEntity;
 import cv.unipiaget.manutencao_aeronave.Services.PecaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -53,11 +52,5 @@ public class PecaController {
 
 
 
-    // Pecas em uso
-    // - /api/pecas/pecaUso
 
-    @GetMapping("/pecaUso")
-    public List<UsoPecaEntity> listarPecasEmUso() {
-        return pecaService.listarPecasEmUso();
-    }
 }
