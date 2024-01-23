@@ -2,6 +2,7 @@ package cv.unipiaget.manutencao_aeronave.Controller;
 
 import cv.unipiaget.manutencao_aeronave.Entities.AtividadeEquipaEntities;
 import cv.unipiaget.manutencao_aeronave.Entities.AtividadeTecnicoEntities;
+import cv.unipiaget.manutencao_aeronave.Services.AtividadeEquipaServices;
 import cv.unipiaget.manutencao_aeronave.Services.AtividadeTecnicoServices;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -15,10 +16,10 @@ import java.util.Optional;
 @RequestMapping(path = "api/manutencao/tecnico/")
 public class AtividadeTecnicoController {
     private final AtividadeTecnicoServices atividadeTecnicoServices;
-    private final AtividadeEquipaEntities atividadeEquipaServices;
+    private final AtividadeEquipaServices atividadeEquipaServices;
 
 
-    public AtividadeTecnicoController(AtividadeTecnicoServices atividadeTecnicoServices, AtividadeEquipaEntities atividadeEquipaServices) {
+    public AtividadeTecnicoController(AtividadeTecnicoServices atividadeTecnicoServices, AtividadeEquipaServices atividadeEquipaServices) {
         this.atividadeTecnicoServices = atividadeTecnicoServices;
         this.atividadeEquipaServices = atividadeEquipaServices;
     }
@@ -31,7 +32,7 @@ public class AtividadeTecnicoController {
     @PostMapping
     public ResponseEntity<Object> addNewTecnico(@RequestBody AtividadeTecnicoEntities tecnico){
         //verificar se a equipa existe
-        Optional<AtividadeEquipaEntities> equipa = atividadeEquipaServices.getIdEquipa(tecnico.getId_Equipa());
+        Optional<AtividadeEquipaEntities> equipa = atividadeEquipaServices.getEquipaById(tecnico.getId_Equipa());
         if (equipa.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Equipa não encontrada");
         }
@@ -56,7 +57,7 @@ public class AtividadeTecnicoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Técnico não encontrada!");
         }
         //verificar se a equipa existe
-        Optional<AtividadeEquipaEntities> equipa = atividadeTecnicoServices.getEquipaById(tecnico.getId_Equipa());
+        Optional<AtividadeEquipaEntities> equipa = atividadeEquipaServices.getEquipaById(tecnico.getId_Equipa());
         if (equipa.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Equipa não encontrada");
         }

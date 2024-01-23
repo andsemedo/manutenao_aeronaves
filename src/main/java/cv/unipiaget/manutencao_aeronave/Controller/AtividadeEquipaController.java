@@ -14,13 +14,13 @@ import java.util.Optional;
 public class AtividadeEquipaController {
     private final AtividadeEquipaServices atividadeEquipaServices;
 
-    public AtividadeEquipaController(AtividadeEquipaServices atividadeEquipaServices){
+ public AtividadeEquipaController(AtividadeEquipaServices atividadeEquipaServices){
         this.atividadeEquipaServices=atividadeEquipaServices;
-    }
+}
 
  @GetMapping
 public List<AtividadeEquipaEntities> getAllEquipa() {
-    return AtividadeEquipaServices.getAllEquipa();
+    return atividadeEquipaServices.getAllEquipa();
 }
 
 //--------------------------------------------------------

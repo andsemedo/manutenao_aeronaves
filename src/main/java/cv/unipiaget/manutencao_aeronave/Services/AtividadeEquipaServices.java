@@ -12,12 +12,11 @@ import java.util.Optional;
 public class AtividadeEquipaServices {
     private final AtividadeEquipaRepository atividadeEquipaRepository;
 
-    public AtividadeEquipaServices(AtividadeEquipaRepository atividadeEquipaRepository) {
+public AtividadeEquipaServices(AtividadeEquipaRepository atividadeEquipaRepository) {
         this.atividadeEquipaRepository = atividadeEquipaRepository;
     }
 
  public List<AtividadeEquipaEntities> getAllEquipa(){
-
         return atividadeEquipaRepository.findAll();
 }
 
@@ -26,12 +25,12 @@ public AtividadeEquipaEntities createNewEquipa(AtividadeEquipaEntities equipa){
 }
 
 public Optional<AtividadeEquipaEntities> getEquipaById(Long idEquipa){
-        return AtividadeEquipaRepository.findById(idEquipa);
+        return atividadeEquipaRepository.findById(idEquipa);
 }
 
 
 public AtividadeEquipaEntities getEquipaByNome(String nomeEquipa){
-        return atividadeEquipaRepository.findByNome(nomeEquipa);
+        return atividadeEquipaRepository.findByNomeEquipa(nomeEquipa);
 }
 
 public AtividadeEquipaEntities updateEquipa(AtividadeEquipaEntities equipa){
