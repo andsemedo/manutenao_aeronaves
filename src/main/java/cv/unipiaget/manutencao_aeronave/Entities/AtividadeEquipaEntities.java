@@ -9,15 +9,15 @@ public class AtividadeEquipaEntities {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private long idEquipa;
-    private String nomeAautor;
+    private String nomeEquipa;
 
 public AtividadeEquipaEntities() {
 
 }
 
-    public AtividadeEquipaEntities(long idEquipa, String nomeAautor) {
+    public AtividadeEquipaEntities(long idEquipa, String nomeEquipa) {
         this.idEquipa = idEquipa;
-        this.nomeAautor = nomeAautor;
+        this.nomeEquipa = nomeEquipa;
     }
 
     public long getIdEquipa() {
@@ -28,11 +28,11 @@ public AtividadeEquipaEntities() {
         this.idEquipa = idEquipa;
     }
 
-    public String getNomeAautor() {
-        return nomeAautor;
+    public String getNomeEquipa() {
+        return nomeEquipa;
     }
 
-    public void setNomeAautor(String nomeAautor) {
-        this.nomeAautor = nomeAautor;
+    public void setNomeEquipa(String nomeAautor) {
+        this.nomeEquipa = nomeAautor;
     }
 }

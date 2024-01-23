@@ -1,13 +1,11 @@
 package cv.unipiaget.manutencao_aeronave.Services;
 
-import cv.unipiaget.manutencao_aeronave.Entities.AtividadeEquipaEntities;
 import cv.unipiaget.manutencao_aeronave.Entities.AtividadeTecnicoEntities;
-import cv.unipiaget.manutencao_aeronave.Enums.AtividadeTecnicoEnum;
-import cv.unipiaget.manutencao_aeronave.GestaoVooSimulate.GestaoVooMockService;
 import cv.unipiaget.manutencao_aeronave.Repository.AtividadeTecnicoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AtividadeTecnicoServices {
@@ -19,52 +17,41 @@ public class AtividadeTecnicoServices {
 //-------------------------------------------------
 //    Listar tecnico
 //-------------------------------------------------
-     public List<AtividadeTecnicoEntities> getTecnico() {
-         return atividadeTecnicoRepository.findBy();
+     public List<AtividadeTecnicoEntities> getAllTecnico() {
+         return atividadeTecnicoRepository.findAll();
     }
 
 //-------------------------------------------------
 // Delete Tecnico
 //-------------------------------------------------
-    public void deleteTecnico(long idTecnico){
-        if(!atividadeTecnicoRepository.existsById(idTecnico)){
-            throw new IllegalStateException("Esse tecnico não existe. Tente novamente");
-        }
+    public Boolean deleteTecnico(long idTecnico){
         atividadeTecnicoRepository.deleteById(idTecnico);
+        return true;
     }
 
 //-------------------------------------------------
 //Create Tecnico
 //-------------------------------------------------
-    public void createTecnico(long idTecnico, String nome, AtividadeTecnicoEnum status, long idEequipa){
-            long id = idTecnico.getIdTecnico();
-            String nome = nomeTecnico.getNomeTecnico();
-            AtividadeTecnicoEnum status = status.getStatus();
-            long idequipa = idEequipa.getIdEquipa;
+    public AtividadeTecnicoEntities addNewTecnico(AtividadeTecnicoEntities tecnico){
+        return atividadeTecnicoRepository.save(tecnico);
+    }
 
-            if(idTecnico == atividadeTecnicoRepository.findBy()){
-                System.out.println("Esse técnico ja existe.");
-            }
-            else {
-
-            }
+    public AtividadeTecnicoEntities getTecnicoById(Long id) {
+        Optional<AtividadeTecnicoEntities> tecnico = atividadeTecnicoRepository.findById(id);
+        if (tecnico.isEmpty()) {
+            return null;
+        }
+        return tecnico.get();
     }
 
 
 //-------------------------------------------------
 //Update Tecnico
 //-------------------------------------------------
-    public void updateTecnico(long idTecnico, AtividadeTecnicoEnum cargo) {
-        AtividadeEquipaEntities tecnicoEntities = atividadeTecnicoRepository.findById(idTecnico)
-                .orElseThrow(() -> new IllegalStateException("Tecnico não existe!"));
-
-        if (cargo != null) {
-            tecnicoEntities.setCargo(cargo);
-        }
-        atividadeTecnicoRepository.save(tecnicoEntities);
+    public AtividadeTecnicoEntities updateTecnico(AtividadeTecnicoEntities tecnico) {
+        return atividadeTecnicoRepository.save(tecnico);
     }
 
-
-    //----------------------------------------------
+//----------------------------------------------
 
 }

@@ -1,6 +1,7 @@
 package cv.unipiaget.manutencao_aeronave.Entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 /**
@@ -12,6 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "tbl_uso_pecas")
 public class UsoPecaEntity {
 
+    @Id
     private int id_peca;
     private int id_registro;
     private int qtd_utilizado;
