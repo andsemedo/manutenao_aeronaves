@@ -39,7 +39,7 @@ public class EncomendaPecaEntity {
 
 
 
-    public Long getIdEncomendaPeca() {
+    public Long getIdEncomendaPeca(int id) {
         return id_encomendaPeca;
     }
 

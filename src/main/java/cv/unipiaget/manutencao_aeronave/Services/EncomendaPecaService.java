@@ -6,6 +6,7 @@
 package cv.unipiaget.manutencao_aeronave.Services;
 
 import cv.unipiaget.manutencao_aeronave.Entities.EncomendaPecaEntity;
+import cv.unipiaget.manutencao_aeronave.Entities.PecaEntity;
 import cv.unipiaget.manutencao_aeronave.Repository.EncomendaPecaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,9 +27,8 @@ public class EncomendaPecaService {
         return encomendaPecaRepository.findAll();
     }
 
-    public EncomendaPecaEntity obterPorId(int id) {
-        Optional<EncomendaPecaEntity> encomendaOptional = encomendaPecaRepository.findById(id);
-        return encomendaOptional.orElse(null);
+    public Optional<EncomendaPecaEntity> obterPorId(int id) {
+        return encomendaPecaRepository.findById(id);
     }
 
     public EncomendaPecaEntity adicionarEncomenda(EncomendaPecaEntity encomenda) {
@@ -43,4 +43,6 @@ public class EncomendaPecaService {
     public void excluirEncomenda(int id) {
         encomendaPecaRepository.deleteById(id);
     }
+
+
 }

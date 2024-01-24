@@ -19,9 +19,9 @@ public class AtividadeTecnicoServices {
 //-------------------------------------------------
 //    Listar tecnico
 //-------------------------------------------------
-     public List<AtividadeTecnicoEntities> getTecnico() {
-         return atividadeTecnicoRepository.findBy();
-    }
+   //  public List<AtividadeTecnicoEntities> getTecnico() {
+      //   return atividadeTecnicoRepository.findBy();
+   // }
 
 //-------------------------------------------------
 // Delete Tecnico
@@ -36,7 +36,7 @@ public class AtividadeTecnicoServices {
 //-------------------------------------------------
 //Create Tecnico
 //-------------------------------------------------
-    public void createTecnico(long idTecnico, String nome, AtividadeTecnicoEnum status, long idEequipa){
+  /*  public void createTecnico(long idTecnico, String nome, AtividadeTecnicoEnum status, long idEequipa){
             long id = idTecnico.getIdTecnico();
             String nome = nomeTecnico.getNomeTecnico();
             AtividadeTecnicoEnum status = status.getStatus();
@@ -49,10 +49,11 @@ public class AtividadeTecnicoServices {
 
             }
     }
-
+*/
 
 //-------------------------------------------------
 //Update Tecnico
+    /*
 //-------------------------------------------------
     public void updateTecnico(long idTecnico, AtividadeTecnicoEnum cargo) {
         AtividadeEquipaEntities tecnicoEntities = atividadeTecnicoRepository.findById(idTecnico)
@@ -63,8 +64,7 @@ public class AtividadeTecnicoServices {
         }
         atividadeTecnicoRepository.save(tecnicoEntities);
     }
-
-
+*/
     //----------------------------------------------
 
 }

@@ -7,9 +7,7 @@ package cv.unipiaget.manutencao_aeronave.Services;
  */
 
 import cv.unipiaget.manutencao_aeronave.Entities.PecaEntity;
-import cv.unipiaget.manutencao_aeronave.Entities.UsoPecaEntity;
 import cv.unipiaget.manutencao_aeronave.Repository.PecaRepository;
-import cv.unipiaget.manutencao_aeronave.Repository.UsoPecaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -37,8 +35,9 @@ public class PecaService {
         return pecaRepository.save(peca);
     }
 
-    public void excluirPeca(int id) {
+    public boolean excluirPeca(int id) {
         pecaRepository.deleteById(id);
+        return false;
     }
 
 
