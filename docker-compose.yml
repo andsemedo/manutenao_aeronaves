@@ -1,27 +1,28 @@
 version: '3.8'
 services:
-  postgresqldb:
-    container_name: postgresdb
+  postgres_manutencao:
+    container_name: postgres_manutencao
     image: postgres:15
     ports:
       - "5433:5432"
     environment:
-      POSTGRES_DB: manutencao_aeronave
+      POSTGRES_DB: db_manutencao
       POSTGRES_USER: manutencao_user
       POSTGRES_PASSWORD: manutencao_pass
     volumes:
-      - postgres_data:/var/lib/postgresql/postgres_data
+      - postgres_manutencao_data:/var/lib/postgresql/postgres_manutencao
 
-  pgadmin:
-    container_name: pgadmin
+  pgadmin_manutencao:
+    container_name: pgadmin_manutencao
     image: dpage/pgadmin4
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     ports:
-      - "8172:8171"
+      - "8172:80"
     depends_on:
-      - postgresqldb
+      - postgres_manutencao
+
 
 volumes:
-  postgres_data:
+  postgres_manutencao_data:

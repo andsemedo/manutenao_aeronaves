@@ -8,6 +8,8 @@ public class ManutencaoAeronaveApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ManutencaoAeronaveApplication.class, args);
+
+		System.out.println("Compilado com sucesso");
 	}
 
 }
