@@ -2,6 +2,8 @@ package cv.unipiaget.manutencao_aeronave.Entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "atividade_equipa")
 public class AtividadeEquipaEntities {
@@ -9,6 +11,9 @@ public class AtividadeEquipaEntities {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idEquipa;
     private String nomeEquipa;
+
+    @OneToMany(mappedBy = "equipa", fetch = FetchType.EAGER)
+    private List<RegistoTarefaEntity> registoTarefaEntities;
 
     public AtividadeEquipaEntities() {
 

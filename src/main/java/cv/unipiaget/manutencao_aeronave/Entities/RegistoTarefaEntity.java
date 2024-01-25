@@ -19,24 +19,36 @@ public class RegistoTarefaEntity {
     @Column(name = "data_exucucao")
     private LocalDate data_execucao;
     private String comentario;
+
+    @ManyToOne()
+    @JoinColumn(name = "manutencaoid", insertable = false, updatable = false)
+    private AtividadeManutencaoEntity manutencao;
     private Long atividadeManutencao;
+
+    @ManyToOne()
+    @JoinColumn(name = "id_equipa", insertable = false, updatable = false)
+    private AtividadeEquipaEntities equipa;
     private Long id_equipa;
 
     public RegistoTarefaEntity() {
     }
 
-    public RegistoTarefaEntity(LocalDate data_execucao, String comentario, Long atividadeManutencao, Long id_equipa) {
+    public RegistoTarefaEntity(LocalDate data_execucao, String comentario, AtividadeManutencaoEntity manutencao, Long atividadeManutencao, AtividadeEquipaEntities equipa, Long id_equipa) {
         this.data_execucao = data_execucao;
         this.comentario = comentario;
+        this.manutencao = manutencao;
         this.atividadeManutencao = atividadeManutencao;
+        this.equipa = equipa;
         this.id_equipa = id_equipa;
     }
 
-    public RegistoTarefaEntity(Long id, LocalDate data_execucao, String comentario, Long atividadeManutencao, Long id_equipa) {
+    public RegistoTarefaEntity(Long id, LocalDate data_execucao, String comentario, AtividadeManutencaoEntity manutencao, Long atividadeManutencao, AtividadeEquipaEntities equipa, Long id_equipa) {
         this.id = id;
         this.data_execucao = data_execucao;
         this.comentario = comentario;
+        this.manutencao = manutencao;
         this.atividadeManutencao = atividadeManutencao;
+        this.equipa = equipa;
         this.id_equipa = id_equipa;
     }
 
@@ -78,5 +90,21 @@ public class RegistoTarefaEntity {
 
     public void setId_equipa(Long id_equipa) {
         this.id_equipa = id_equipa;
+    }
+
+    public AtividadeManutencaoEntity getManutencao() {
+        return manutencao;
+    }
+
+    public void setManutencao(AtividadeManutencaoEntity manutencao) {
+        this.manutencao = manutencao;
+    }
+
+    public AtividadeEquipaEntities getEquipa() {
+        return equipa;
+    }
+
+    public void setEquipa(AtividadeEquipaEntities equipa) {
+        this.equipa = equipa;
     }
 }

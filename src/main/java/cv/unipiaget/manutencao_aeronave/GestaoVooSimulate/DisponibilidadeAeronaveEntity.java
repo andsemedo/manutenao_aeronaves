@@ -7,26 +7,30 @@ import jakarta.persistence.*;
  * @Date 16/01/2024
  */
 @Entity
-@Table(name = "aeronave")
-public class AeronaveEntity {
+@Table(name = "dispobibilidade_aeronave")
+public class DisponibilidadeAeronaveEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String modelo;
+    @Column(unique = true)
+    private String matricula;
     private int disponibilidade;
 
-    public AeronaveEntity() {
+    public DisponibilidadeAeronaveEntity() {
     }
 
-    public AeronaveEntity(String modelo, int disponibilidade) {
+    public DisponibilidadeAeronaveEntity(String modelo, String matricula, int disponibilidade) {
         this.modelo = modelo;
+        this.matricula = matricula;
         this.disponibilidade = disponibilidade;
     }
 
-    public AeronaveEntity(Long id, String modelo, int disponibilidade) {
+    public DisponibilidadeAeronaveEntity(Long id, String modelo, String matricula, int disponibilidade) {
         this.id = id;
         this.modelo = modelo;
+        this.matricula = matricula;
         this.disponibilidade = disponibilidade;
     }
 
@@ -52,5 +56,13 @@ public class AeronaveEntity {
 
     public void setDisponibilidade(int disponibilidade) {
         this.disponibilidade = disponibilidade;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 }

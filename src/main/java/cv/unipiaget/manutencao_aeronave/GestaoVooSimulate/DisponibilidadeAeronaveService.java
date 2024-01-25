@@ -12,26 +12,25 @@ import java.util.Optional;
  * @Date 16/01/2024
  */
 @Service
-public class AeronaveService {
+public class DisponibilidadeAeronaveService {
 
-    private final AeronaveRepository aeronaveRepository;
+    private final DisponibilidadeAeronaveRepository aeronaveRepository;
 
-    public AeronaveService(AeronaveRepository aeronaveRepository) {
+    public DisponibilidadeAeronaveService(DisponibilidadeAeronaveRepository aeronaveRepository) {
         this.aeronaveRepository = aeronaveRepository;
     }
 
-    public List<AeronaveEntity> getAllAeronaves() {
+    public List<DisponibilidadeAeronaveEntity> getAllAeronaves() {
         return aeronaveRepository.findAll();
     }
-    public ResponseEntity<Object> verificarDisponibilidade(Long idAeronave) {
-        Optional<AeronaveEntity> aeronaveEntity = aeronaveRepository.findById(idAeronave);
-        if(aeronaveEntity.isEmpty()) {
+    public ResponseEntity<Object> verificarDisponibilidade(String matricula) {
+        DisponibilidadeAeronaveEntity aeronaveEntity = aeronaveRepository.findByMatricula(matricula);
+        if(aeronaveEntity == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aeronave não encontrado");
         }
 
-        AeronaveEntity aeronave = aeronaveEntity.get();
 
-        if(aeronave.getDisponibilidade() == 1) {
+        if(aeronaveEntity.getDisponibilidade() == 1) {
             return ResponseEntity.status(HttpStatus.OK).body(true);
         }
 

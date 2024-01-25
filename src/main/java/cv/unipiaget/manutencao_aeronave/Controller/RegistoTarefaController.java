@@ -60,6 +60,9 @@ public class RegistoTarefaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Equipa não encontrada");
         }
 
+        tarefa.setManutencao(manutencao);
+        tarefa.setEquipa(equipa.get());
+
         return ResponseEntity.status(HttpStatus.CREATED).body(registoTarefaService.addNewRegistoTarefa(tarefa));
 
     }

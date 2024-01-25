@@ -5,7 +5,7 @@ import cv.unipiaget.manutencao_aeronave.Enums.TipoManutencaoEnum;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 
 /**
  * @author Anderson Semedo
@@ -17,39 +17,47 @@ public class AtividadeManutencaoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long manutencaoid;
     private TipoManutencaoEnum tipoManutencao;
     private String descricao;
     private StatusManutencaoEnum statusManutencao;
-    private int idAeronave;
+    //private String matriculaAeronave;
     private LocalDate data;
+
+    @OneToMany(mappedBy = "manutencao", fetch = FetchType.EAGER)
+    private List<RegistoTarefaEntity> tarefa;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "aeronaveid", insertable = false, updatable = false)
+    private AeronaveEntity aeronave;
+
+    private Long aeronaveid;
 
     public AtividadeManutencaoEntity() {
     }
 
-    public AtividadeManutencaoEntity(TipoManutencaoEnum tipoManutencao, String descricao, StatusManutencaoEnum statusManutencao, int idAeronav, LocalDate data) {
+    public AtividadeManutencaoEntity(TipoManutencaoEnum tipoManutencao, String descricao, StatusManutencaoEnum statusManutencao, LocalDate data, AeronaveEntity aeronave) {
         this.tipoManutencao = tipoManutencao;
         this.descricao = descricao;
         this.statusManutencao = statusManutencao;
-        this.idAeronave = idAeronave;
         this.data = data;
+        this.aeronave = aeronave;
     }
 
-    public AtividadeManutencaoEntity(Long id, TipoManutencaoEnum tipoManutencao, String descricao, StatusManutencaoEnum statusManutencao, int idAeronave, LocalDate data) {
-        this.id = id;
+    public AtividadeManutencaoEntity(Long manutencaoid, TipoManutencaoEnum tipoManutencao, String descricao, StatusManutencaoEnum statusManutencao, LocalDate data, AeronaveEntity aeronave) {
+        this.manutencaoid = manutencaoid;
         this.tipoManutencao = tipoManutencao;
         this.descricao = descricao;
         this.statusManutencao = statusManutencao;
-        this.idAeronave = idAeronave;
         this.data = data;
+        this.aeronave = aeronave;
     }
 
-    public Long getId() {
-        return id;
+    public Long getManutencaoid() {
+        return manutencaoid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setManutencaoid(Long manutencaoid) {
+        this.manutencaoid = manutencaoid;
     }
 
     public TipoManutencaoEnum getTipoManutencao() {
@@ -76,19 +84,27 @@ public class AtividadeManutencaoEntity {
         this.statusManutencao = statusManutencao;
     }
 
-    public int getIdAeronave() {
-        return idAeronave;
-    }
-
-    public void setIdAeronave(int idAeronave) {
-        this.idAeronave = idAeronave;
-    }
-
     public LocalDate getData() {
         return data;
     }
 
     public void setData(LocalDate data) {
         this.data = data;
+    }
+
+    public AeronaveEntity getAeronave() {
+        return aeronave;
+    }
+
+    public void setAeronave(AeronaveEntity aeronave) {
+        this.aeronave = aeronave;
+    }
+
+    public Long getAeronaveid() {
+        return aeronaveid;
+    }
+
+    public void setAeronaveid(Long aeronaveid) {
+        this.aeronaveid = aeronaveid;
     }
 }

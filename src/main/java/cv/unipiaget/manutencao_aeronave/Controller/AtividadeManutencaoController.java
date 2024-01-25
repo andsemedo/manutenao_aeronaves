@@ -1,14 +1,16 @@
 package cv.unipiaget.manutencao_aeronave.Controller;
 
+import cv.unipiaget.manutencao_aeronave.Entities.AeronaveEntity;
 import cv.unipiaget.manutencao_aeronave.Entities.AtividadeManutencaoEntity;
 import cv.unipiaget.manutencao_aeronave.GestaoVooSimulate.GestaoVooMockService;
+import cv.unipiaget.manutencao_aeronave.Repository.AtividadeManutencaoRepository;
+import cv.unipiaget.manutencao_aeronave.Services.AeronaveService;
 import cv.unipiaget.manutencao_aeronave.Services.AtividadeManutencaoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Anderson Semedo
@@ -19,11 +21,15 @@ import java.util.Optional;
 public class AtividadeManutencaoController {
 
     public final AtividadeManutencaoService atividadeManutencaoService;
+    public final AtividadeManutencaoRepository atividadeManutencaoRepository;
     private final GestaoVooMockService gestaoVooMockService;
+    private final AeronaveService aeronaveService;
 
-    public AtividadeManutencaoController(AtividadeManutencaoService atividadeManutencaoService, GestaoVooMockService gestaoVooMockService) {
+    public AtividadeManutencaoController(AtividadeManutencaoService atividadeManutencaoService, AtividadeManutencaoRepository atividadeManutencaoRepository, GestaoVooMockService gestaoVooMockService, AeronaveService aeronaveService) {
         this.atividadeManutencaoService = atividadeManutencaoService;
+        this.atividadeManutencaoRepository = atividadeManutencaoRepository;
         this.gestaoVooMockService = gestaoVooMockService;
+        this.aeronaveService = aeronaveService;
     }
 
     @GetMapping
@@ -42,12 +48,21 @@ public class AtividadeManutencaoController {
 
     @PostMapping
     public ResponseEntity<Object> addNewManutencao(@RequestBody AtividadeManutencaoEntity manutencaoEntity) {
+        AeronaveEntity aeronave = aeronaveService.getAeronaveById(manutencaoEntity.getAeronaveid());
+        if (aeronave == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Aeronave não encontrado");
         //verificar disponibilidade de aeronave
-        Boolean disponibilidade = gestaoVooMockService.verificarDisponibilidade(manutencaoEntity.getIdAeronave());
+        Boolean disponibilidade = gestaoVooMockService.verificarDisponibilidade(aeronave.getMatricula());
         if(!disponibilidade) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Aeronave não disponivel");
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(atividadeManutencaoService.addNewManutencao(manutencaoEntity));
+        AtividadeManutencaoEntity manutencao = new AtividadeManutencaoEntity(
+                manutencaoEntity.getTipoManutencao(),
+                manutencaoEntity.getDescricao(),
+                manutencaoEntity.getStatusManutencao(),
+                manutencaoEntity.getData(),
+                aeronave
+                );
+        return ResponseEntity.status(HttpStatus.CREATED).body(atividadeManutencaoService.addNewManutencao(manutencao));
     }
 
     @PutMapping("/{id}")
