@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Configuration
 public class DisponibilidadeAeronaveConfig {
-
+/*
     @Bean
     CommandLineRunner commandLineRunnerAeronave(DisponibilidadeAeronaveRepository aeronaveRepository) {
         return args -> {
@@ -26,6 +26,6 @@ public class DisponibilidadeAeronaveConfig {
                     List.of(aeronave_1,aeronave_2,aeronave_3,aeronave_4,aeronave_5)
             );
         };
-    }
+    }*/
 
 }

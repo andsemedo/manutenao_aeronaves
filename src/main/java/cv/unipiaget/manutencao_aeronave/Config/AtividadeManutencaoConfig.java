@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Configuration
 public class AtividadeManutencaoConfig {
-
+/*
     @Bean
     CommandLineRunner commandLineRunnerAddAeronave(AeronaveRepository aeronaveRepository) {
 
@@ -38,7 +38,7 @@ public class AtividadeManutencaoConfig {
         };
 
     }
-/*
+
     @Bean
     CommandLineRunner commandLineRunner(AtividadeManutencaoRepository manutencaoRepository) {
         return args -> {

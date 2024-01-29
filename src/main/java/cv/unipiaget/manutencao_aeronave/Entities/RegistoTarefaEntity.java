@@ -3,7 +3,7 @@ package cv.unipiaget.manutencao_aeronave.Entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author Anderson Semedo
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class RegistoTarefaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long registotarefaid;
 
     @Column(name = "data_exucucao")
     private LocalDate data_execucao;
@@ -30,6 +30,9 @@ public class RegistoTarefaEntity {
     private AtividadeEquipaEntities equipa;
     private Long id_equipa;
 
+    @OneToMany(mappedBy = "registoTarefa")
+    private List<UsoPecaEntity> usoPeca;
+
     public RegistoTarefaEntity() {
     }
 
@@ -42,8 +45,8 @@ public class RegistoTarefaEntity {
         this.id_equipa = id_equipa;
     }
 
-    public RegistoTarefaEntity(Long id, LocalDate data_execucao, String comentario, AtividadeManutencaoEntity manutencao, Long atividadeManutencao, AtividadeEquipaEntities equipa, Long id_equipa) {
-        this.id = id;
+    public RegistoTarefaEntity(Long registotarefaid, LocalDate data_execucao, String comentario, AtividadeManutencaoEntity manutencao, Long atividadeManutencao, AtividadeEquipaEntities equipa, Long id_equipa) {
+        this.registotarefaid = registotarefaid;
         this.data_execucao = data_execucao;
         this.comentario = comentario;
         this.manutencao = manutencao;
@@ -52,12 +55,12 @@ public class RegistoTarefaEntity {
         this.id_equipa = id_equipa;
     }
 
-    public Long getId() {
-        return id;
+    public Long getRegistotarefaid() {
+        return registotarefaid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setRegistotarefaid(Long registotarefaid) {
+        this.registotarefaid = registotarefaid;
     }
 
     public LocalDate getData_execucao() {

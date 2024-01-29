@@ -31,7 +31,7 @@ public class AeronaveEntity {
     private int capacidade;
 
     @OneToMany(mappedBy = "aeronave", fetch = FetchType.EAGER)
-    private List<AtividadeManutencaoEntity> manutencao = new ArrayList<AtividadeManutencaoEntity>();
+    private List<AtividadeManutencaoEntity> manutencao;
 
     public AeronaveEntity() {
     }

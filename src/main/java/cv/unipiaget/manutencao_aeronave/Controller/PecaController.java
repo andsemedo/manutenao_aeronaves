@@ -27,9 +27,8 @@ public class PecaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PecaEntity>> listarTodasPecas() {
-        List<PecaEntity> pecas = pecaService.listarTodasPecas();
-        return ResponseEntity.ok(pecas);
+    public List<PecaEntity> listarTodasPecas() {
+        return pecaService.listarTodasPecas();
     }
 
     @GetMapping("/obter/{id}")

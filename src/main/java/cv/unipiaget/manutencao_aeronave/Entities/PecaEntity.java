@@ -1,9 +1,9 @@
 package cv.unipiaget.manutencao_aeronave.Entities;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 
 /**
@@ -16,10 +16,16 @@ import jakarta.persistence.Table;
 public class PecaEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_peca;
     private String nome;
     private int quantidade;
 
+    @OneToMany(mappedBy = "peca")
+    private List<UsoPecaEntity> usoPeca;
+
+    public PecaEntity() {
+    }
 
     public PecaEntity(int id_peca, String nome, int quantidade, String status) {
         this.id_peca = id_peca;
