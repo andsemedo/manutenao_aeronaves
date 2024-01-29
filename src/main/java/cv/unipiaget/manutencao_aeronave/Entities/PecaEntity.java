@@ -27,7 +27,12 @@ public class PecaEntity {
     public PecaEntity() {
     }
 
-    public PecaEntity(int id_peca, String nome, int quantidade, String status) {
+    public PecaEntity(String nome, int quantidade) {
+        this.nome = nome;
+        this.quantidade = quantidade;
+    }
+
+    public PecaEntity(int id_peca, String nome, int quantidade) {
         this.id_peca = id_peca;
         this.nome = nome;
         this.quantidade = quantidade;

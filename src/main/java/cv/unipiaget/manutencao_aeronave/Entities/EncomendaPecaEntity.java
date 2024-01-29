@@ -1,8 +1,6 @@
 package cv.unipiaget.manutencao_aeronave.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -15,6 +13,7 @@ import java.util.Date;
 @Table(name = "tbl_encomenda_pecas")
 public class EncomendaPecaEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_encomendaPeca;
     private int quantidade;
     private Date data_encomenda;
