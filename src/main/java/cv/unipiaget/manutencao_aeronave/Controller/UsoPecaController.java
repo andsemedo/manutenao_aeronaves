@@ -56,7 +56,7 @@ public class UsoPecaController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Estoque de peça não disponivel");
         }
         //atualizar estoque
-        int novoEstoque = quantidadePecaDispo - peca.getQuantidade();
+        int novoEstoque = quantidadePecaDispo - usoPeca.getQuantidade();
         peca.setQuantidade(novoEstoque);
         pecaService.updateEstoque(peca);
 
