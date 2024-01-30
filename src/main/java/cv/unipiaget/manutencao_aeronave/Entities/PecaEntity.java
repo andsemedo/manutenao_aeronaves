@@ -24,6 +24,9 @@ public class PecaEntity {
     @OneToMany(mappedBy = "peca")
     private List<UsoPecaEntity> usoPeca;
 
+    @OneToMany(mappedBy = "peca")
+    private List<EncomendaPecaEntity> encomendaPeca;
+
     public PecaEntity() {
     }
 

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/pecas")
+@RequestMapping("/api/manutencao/pecas")
 public class PecaController {
 
     private final PecaService pecaService;

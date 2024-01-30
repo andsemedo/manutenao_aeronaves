@@ -35,4 +35,7 @@ public class EncomendaPecaService {
     }
 
 
+    public EncomendaPecaEntity atualizarStatus(EncomendaPecaEntity encomenda) {
+        return encomendaPecaRepository.save(encomenda);
+    }
 }
