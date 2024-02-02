@@ -1,6 +1,5 @@
 package cv.unipiaget.manutencao_aeronave.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import cv.unipiaget.manutencao_aeronave.Enums.StatusManutencaoEnum;
 import cv.unipiaget.manutencao_aeronave.Enums.TipoManutencaoEnum;
@@ -35,7 +34,7 @@ public class AtividadeManutencaoEntity {
 
     private Long aeronaveid;
 
-    public AtividadeManutencaoEntity() {
+    public AtividadeManutencaoEntity(long l, String preventiva, String verificação_dos_motores, String pendente, String s, AeronaveEntity aeronave, Long aeronaveid) {
     }
 
     public AtividadeManutencaoEntity(TipoManutencaoEnum tipoManutencao, String descricao, StatusManutencaoEnum statusManutencao, LocalDate data, AeronaveEntity aeronave) {

@@ -54,18 +54,6 @@ public class AtividadeManutencaoService {
 
     @Transactional
     public AtividadeManutencaoEntity updateManutencao(AtividadeManutencaoEntity manutencaoEntity) {
-        /*AtividadeManutencaoEntity manutencaoEntity = atividadeManutencaoRepository.findById(idManutencao)
-                .orElseThrow( () -> new IllegalStateException(
-                        "Manutenção com o id " + idManutencao + " não existe"
-                ));
-
-        if(status != null) {
-            manutencaoEntity.setStatusManutencao(status);
-        }
-        if(descricao != null) {
-            manutencaoEntity.setDescricao(descricao);
-        }*/
-
         return atividadeManutencaoRepository.save(manutencaoEntity);
 
     }
