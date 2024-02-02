@@ -1,5 +1,7 @@
 package cv.unipiaget.manutencao_aeronave.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import cv.unipiaget.manutencao_aeronave.Enums.StatusManutencaoEnum;
 import cv.unipiaget.manutencao_aeronave.Enums.TipoManutencaoEnum;
 import jakarta.persistence.*;
@@ -28,6 +30,7 @@ public class AtividadeManutencaoEntity {
     private List<RegistoTarefaEntity> tarefa;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "aeronaveid", insertable = false, updatable = false)
+    @JsonIgnoreProperties("manutencao")
     private AeronaveEntity aeronave;
 
     private Long aeronaveid;
@@ -43,6 +46,15 @@ public class AtividadeManutencaoEntity {
         this.aeronave = aeronave;
     }
 
+    public AtividadeManutencaoEntity(TipoManutencaoEnum tipoManutencao, String descricao, StatusManutencaoEnum statusManutencao, LocalDate data, AeronaveEntity aeronave, Long aeronaveid) {
+        this.tipoManutencao = tipoManutencao;
+        this.descricao = descricao;
+        this.statusManutencao = statusManutencao;
+        this.data = data;
+        this.aeronave = aeronave;
+        this.aeronaveid = aeronaveid;
+    }
+
     public AtividadeManutencaoEntity(Long manutencaoid, TipoManutencaoEnum tipoManutencao, String descricao, StatusManutencaoEnum statusManutencao, LocalDate data, AeronaveEntity aeronave) {
         this.manutencaoid = manutencaoid;
         this.tipoManutencao = tipoManutencao;
@@ -50,6 +62,14 @@ public class AtividadeManutencaoEntity {
         this.statusManutencao = statusManutencao;
         this.data = data;
         this.aeronave = aeronave;
+    }
+
+    public AtividadeManutencaoEntity(Long manutencaoid, TipoManutencaoEnum tipoManutencao, String descricao, StatusManutencaoEnum statusManutencao, LocalDate data) {
+        this.manutencaoid = manutencaoid;
+        this.tipoManutencao = tipoManutencao;
+        this.descricao = descricao;
+        this.statusManutencao = statusManutencao;
+        this.data = data;
     }
 
     public Long getManutencaoid() {

@@ -43,6 +43,10 @@ public class AtividadeManutencaoService {
         return manutencao.get();
     }
 
+    public List<AtividadeManutencaoEntity> getHistoricoByAeronave(Long id) {
+        return atividadeManutencaoRepository.findByAeronaveid(id);
+    }
+
     public void deleteManutencao(Long idManutencao) {
 
         atividadeManutencaoRepository.deleteById(idManutencao);

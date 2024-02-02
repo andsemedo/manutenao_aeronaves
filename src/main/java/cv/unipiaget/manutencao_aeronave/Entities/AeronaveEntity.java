@@ -1,5 +1,6 @@
 package cv.unipiaget.manutencao_aeronave.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -31,6 +32,7 @@ public class AeronaveEntity {
     private int capacidade;
 
     @OneToMany(mappedBy = "aeronave", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("aeronave")
     private List<AtividadeManutencaoEntity> manutencao;
 
     public AeronaveEntity() {

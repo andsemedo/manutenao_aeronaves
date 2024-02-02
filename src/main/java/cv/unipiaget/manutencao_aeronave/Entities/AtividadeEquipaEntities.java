@@ -1,7 +1,9 @@
 package cv.unipiaget.manutencao_aeronave.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,6 +16,10 @@ public class AtividadeEquipaEntities {
 
     @OneToMany(mappedBy = "equipa", fetch = FetchType.EAGER)
     private List<RegistoTarefaEntity> registoTarefaEntities;
+
+    @OneToMany(mappedBy = "equipa", fetch = FetchType.EAGER)
+    @JsonIgnoreProperties("equipa")
+    private List<AtividadeTecnicoEntities> tecnicoEntities = new ArrayList<AtividadeTecnicoEntities>();
 
     public AtividadeEquipaEntities() {
 
@@ -42,5 +48,13 @@ public class AtividadeEquipaEntities {
 
     public void setNomeEquipa(String nomeAautor) {
         this.nomeEquipa = nomeAautor;
+    }
+
+    public List<AtividadeTecnicoEntities> getTecnicoEntities() {
+        return tecnicoEntities;
+    }
+
+    public void setTecnicoEntities(List<AtividadeTecnicoEntities> tecnicoEntities) {
+        this.tecnicoEntities = tecnicoEntities;
     }
 }

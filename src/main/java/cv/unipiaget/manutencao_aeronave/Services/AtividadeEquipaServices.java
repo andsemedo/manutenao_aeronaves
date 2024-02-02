@@ -17,7 +17,7 @@ public AtividadeEquipaServices(AtividadeEquipaRepository atividadeEquipaReposito
     }
 
  public List<AtividadeEquipaEntities> getAllEquipa(){
-        return atividadeEquipaRepository.findAll();
+    return atividadeEquipaRepository.findAll();
 }
 
 public AtividadeEquipaEntities createNewEquipa(AtividadeEquipaEntities equipa){

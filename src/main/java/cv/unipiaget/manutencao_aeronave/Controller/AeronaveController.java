@@ -35,6 +35,7 @@ public class AeronaveController {
         return aeronaveService.getAllAeronave();
     }
 
+
     @PostMapping
     public ResponseEntity<Object> addNewAeronave(@RequestBody @Valid AeronaveEntity aeronave) {
         AeronaveEntity aeronaveMatricula = aeronaveRepository.findByMatricula(aeronave.getMatricula());

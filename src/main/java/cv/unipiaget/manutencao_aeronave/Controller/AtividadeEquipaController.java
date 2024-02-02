@@ -2,12 +2,14 @@ package cv.unipiaget.manutencao_aeronave.Controller;
 
 import cv.unipiaget.manutencao_aeronave.Entities.AtividadeEquipaEntities;
 import cv.unipiaget.manutencao_aeronave.Services.AtividadeEquipaServices;
+import cv.unipiaget.manutencao_aeronave.responses.AtividadeEquipaResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/manutencao/equipa/")
@@ -19,8 +21,18 @@ public class AtividadeEquipaController {
 }
 
  @GetMapping
-public List<AtividadeEquipaEntities> getAllEquipa() {
-    return atividadeEquipaServices.getAllEquipa();
+public List<AtividadeEquipaResponse> getAllEquipa() {
+     List<AtividadeEquipaEntities> equipaEntities = atividadeEquipaServices.getAllEquipa();
+     List<AtividadeEquipaResponse> equipaResponsesList = equipaEntities.stream()
+             .map(eq -> {
+                 AtividadeEquipaResponse equipaResponse = new AtividadeEquipaResponse();
+                 equipaResponse.setId(eq.getIdEquipa());
+                 equipaResponse.setNomeEquipa(eq.getNomeEquipa());
+                 return equipaResponse;
+             })
+             .collect(Collectors.toList());
+
+     return equipaResponsesList;
 }
 
 //--------------------------------------------------------
@@ -31,6 +43,8 @@ public ResponseEntity<Object> createNewEquipa(@RequestBody AtividadeEquipaEntiti
     if (equipa_verify != null) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Já existe uma equipa com este nome");
     }
+
+
 
     return ResponseEntity.status(HttpStatus.CREATED).body(atividadeEquipaServices.createNewEquipa(equipa));
 }
@@ -43,7 +57,18 @@ public ResponseEntity<Object> getEquipaById(@PathVariable(name = "idEquipa") Lon
     if (equipa.isEmpty()) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Equipa não encontrada");
     }
-    return ResponseEntity.status(HttpStatus.OK).body(equipa.get());
+
+    List<AtividadeEquipaResponse> equipaResponsesList = equipa.stream()
+            .map(eq -> {
+                AtividadeEquipaResponse equipaResponse = new AtividadeEquipaResponse();
+                equipaResponse.setId(eq.getIdEquipa());
+                equipaResponse.setNomeEquipa(eq.getNomeEquipa());
+                equipaResponse.setListaTecnicos(eq.getTecnicoEntities());
+                return equipaResponse;
+            })
+            .collect(Collectors.toList());
+
+    return ResponseEntity.status(HttpStatus.OK).body(equipaResponsesList);
 }
 
 //---------------------------------------------------------------

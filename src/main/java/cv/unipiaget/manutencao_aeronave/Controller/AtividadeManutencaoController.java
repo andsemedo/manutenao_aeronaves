@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Anderson Semedo
@@ -46,6 +47,29 @@ public class AtividadeManutencaoController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Manutenção com o id " + id + " não existe");
     }
 
+    @GetMapping("aeronave/{id}/historico")
+    public ResponseEntity<Object> getHistoricoManutencaoByAeronave(@PathVariable("id") Long id) {
+        AeronaveEntity aeronave = aeronaveService.getAeronaveById(id);
+        if (aeronave == null) {
+            ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aeronave não encontrado");
+        }
+
+        List<AtividadeManutencaoEntity> manutencaoList = atividadeManutencaoService.getHistoricoByAeronave(id).stream()
+                .map(man -> {
+                    AtividadeManutencaoEntity manutencao = new AtividadeManutencaoEntity(
+                        man.getManutencaoid(),
+                        man.getTipoManutencao(),
+                        man.getDescricao(),
+                        man.getStatusManutencao(),
+                        man.getData()
+                    );
+                    return manutencao;
+                })
+                .collect(Collectors.toList());
+
+        return ResponseEntity.status(HttpStatus.OK).body(manutencaoList);
+    }
+
     @PostMapping
     public ResponseEntity<Object> addNewManutencao(@RequestBody AtividadeManutencaoEntity manutencaoEntity) {
         AeronaveEntity aeronave = aeronaveService.getAeronaveById(manutencaoEntity.getAeronaveid());
@@ -60,7 +84,8 @@ public class AtividadeManutencaoController {
                 manutencaoEntity.getDescricao(),
                 manutencaoEntity.getStatusManutencao(),
                 manutencaoEntity.getData(),
-                aeronave
+                aeronave,
+                manutencaoEntity.getAeronaveid()
                 );
         return ResponseEntity.status(HttpStatus.CREATED).body(atividadeManutencaoService.addNewManutencao(manutencao));
     }

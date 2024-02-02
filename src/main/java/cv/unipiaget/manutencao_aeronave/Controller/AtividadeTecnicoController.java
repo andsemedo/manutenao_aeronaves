@@ -36,6 +36,7 @@ public class AtividadeTecnicoController {
         if (equipa.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Equipa não encontrada");
         }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(atividadeTecnicoServices.addNewTecnico(tecnico));
     }
 
