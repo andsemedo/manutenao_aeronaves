@@ -55,6 +55,9 @@ public class RegistoTarefaEntity {
         this.id_equipa = id_equipa;
     }
 
+    public RegistoTarefaEntity(long registotarefaid, String s, String reparação_no_motor_esquerdo, AtividadeManutencaoEntity manutencao, Long manutencaoid, AtividadeEquipaEntities equipa, long idEquipa) {
+    }
+
     public Long getRegistotarefaid() {
         return registotarefaid;
     }
