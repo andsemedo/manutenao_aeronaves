@@ -41,6 +41,15 @@ public class UsoPecaEntity {
         this.quantidade = quantidade;
     }
 
+    public UsoPecaEntity(Long id, RegistoTarefaEntity registoTarefa, Long tarefaId, PecaEntity peca, int pecaId, int quantidade) {
+        this.id = id;
+        this.registoTarefa = registoTarefa;
+        this.tarefaId = tarefaId;
+        this.peca = peca;
+        this.pecaId = pecaId;
+        this.quantidade = quantidade;
+    }
+
     public Long getId() {
         return id;
     }
