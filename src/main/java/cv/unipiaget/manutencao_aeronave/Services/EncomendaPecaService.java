@@ -22,8 +22,10 @@ public class EncomendaPecaService {
         return encomendaPecaRepository.findAll();
     }
 
-    public Optional<EncomendaPecaEntity> obterEncomendaPecaPorId(int id) {
-        return encomendaPecaRepository.findById(id);
+    public EncomendaPecaEntity obterEncomendaPecaPorId(int id) {
+        Optional<EncomendaPecaEntity> encomendaPeca = encomendaPecaRepository.findById(id);
+        if (encomendaPeca.isEmpty()) return null;
+        return encomendaPeca.get();
     }
 
     public EncomendaPecaEntity salvarEncomendaPeca(EncomendaPecaEntity encomendaPeca) {

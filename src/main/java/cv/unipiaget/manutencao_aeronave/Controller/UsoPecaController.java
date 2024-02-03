@@ -6,6 +6,9 @@ import cv.unipiaget.manutencao_aeronave.Entities.UsoPecaEntity;
 import cv.unipiaget.manutencao_aeronave.Services.PecaService;
 import cv.unipiaget.manutencao_aeronave.Services.RegistoTarefaService;
 import cv.unipiaget.manutencao_aeronave.Services.UsoPecaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +33,23 @@ public class UsoPecaController {
         this.pecaService = pecaService;
     }
 
+    @Operation(description = "Endpoint que retorna todas os uso peças")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "retorna uma lista de uso peças"),
+            @ApiResponse(responseCode = "404", description = "Nenhum uso peça encontrada")
+    })
     @GetMapping
-    public List<UsoPecaEntity> getAllUsoPeca() {return usoPecaService.getAllUsoPeca();}
+    public ResponseEntity<Object> getAllUsoPeca() {
+        List<UsoPecaEntity> usoPecaList = usoPecaService.getAllUsoPeca();
+        if(usoPecaList.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhum uso peça encontrado");
+        return ResponseEntity.status(HttpStatus.OK).body(usoPecaList);
+    }
 
+    @Operation(description = "Endpoint que retorna um uso peça por id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "retorna o uso de peça procurado"),
+            @ApiResponse(responseCode = "404", description = "Uso peca não encontrado")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<Object> getUsoPecaById(@PathVariable("id") Long id) {
         UsoPecaEntity usoPeca = usoPecaService.getUsoPecaById(id);
@@ -41,6 +58,13 @@ public class UsoPecaController {
         return ResponseEntity.status(HttpStatus.OK).body(usoPeca);
     }
 
+    @Operation(description = "Endpoint que adiciona um uso peça")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "uso de peça adicionado, retorna o uso de peça"),
+            @ApiResponse(responseCode = "404", description = "Registo tarefa não encontrado"),
+            @ApiResponse(responseCode = "404", description = "Peca não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Estoque de peça não disponivel")
+    })
     @PostMapping
     public ResponseEntity<Object> addNewUsoPeca(@RequestBody UsoPecaEntity usoPeca) {
         //procurar se o registo tarefa existe
@@ -53,7 +77,7 @@ public class UsoPecaController {
         //verificar se a peca está disponivel em estoque
         int quantidadePecaDispo = peca.getQuantidade();
         if (usoPeca.getQuantidade() > quantidadePecaDispo) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Estoque de peça não disponivel");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Estoque de peça não disponivel");
         }
         //atualizar estoque
         int novoEstoque = quantidadePecaDispo - usoPeca.getQuantidade();
@@ -66,16 +90,41 @@ public class UsoPecaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(usoPecaService.addNewUsoPeca(usoPeca));
     }
 
+    @Operation(description = "Endpoint que atualiza a quantidade de peça no uso peça")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "uso de peça atualizado, retorna o uso de peça"),
+            @ApiResponse(responseCode = "404", description = "Uso Peça não encontrado")
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateUsoPeca(@PathVariable("id") Long id, @RequestBody UsoPecaEntity usoPeca) {
         UsoPecaEntity usoPecaEntity = usoPecaService.getUsoPecaById(id);
         if (usoPecaEntity == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Uso Peca não encontrado");
+
+        //procurar se peca existe
+        Optional<PecaEntity> pecaOptional = pecaService.obterPecaPorId(usoPecaEntity.getPecaId());
+        if (pecaOptional.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Peca não encontrado");
+        PecaEntity peca = pecaOptional.get();
+        //verificar se a peca está disponivel em estoque
+        int quantidadePecaDispo = peca.getQuantidade();
+        peca.setQuantidade(quantidadePecaDispo + usoPecaEntity.getQuantidade());
+        if (usoPeca.getQuantidade() > quantidadePecaDispo) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Estoque de peça não disponivel");
+        }
+        //atualizar estoque
+        int novoEstoque = peca.getQuantidade() - usoPeca.getQuantidade();
+        peca.setQuantidade(novoEstoque);
+        pecaService.updateEstoque(peca);
 
         usoPecaEntity.setQuantidade(usoPeca.getQuantidade());
 
         return ResponseEntity.status(HttpStatus.OK).body(usoPecaService.updateUsoPeca(usoPecaEntity));
     }
 
+    @Operation(description = "Endpoint que atualiza a quantidade de peça no uso peça")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "uso de peça atualizado, retorna o uso de peça"),
+            @ApiResponse(responseCode = "404", description = "Uso Peça não encontrado")
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUsoPeca(@PathVariable("id") Long id) {
         UsoPecaEntity usoPeca = usoPecaService.getUsoPecaById(id);

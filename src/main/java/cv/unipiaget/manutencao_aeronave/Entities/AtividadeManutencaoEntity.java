@@ -34,6 +34,9 @@ public class AtividadeManutencaoEntity {
 
     private Long aeronaveid;
 
+    public AtividadeManutencaoEntity() {
+    }
+
     public AtividadeManutencaoEntity(long l, String preventiva, String verificação_dos_motores, String pendente, String s, AeronaveEntity aeronave, Long aeronaveid) {
     }
 

@@ -17,17 +17,17 @@ public class AtividadeTecnicoEntities {
     @JoinColumn(name = "id_equipa", insertable = false, updatable = false)
     @JsonIgnoreProperties("tecnicoEntities")
     private AtividadeEquipaEntities equipa;
-    private long id_Equipa;
+    private long idequipa;
 
     public AtividadeTecnicoEntities(){
     }
 
-    public AtividadeTecnicoEntities(long idTecnico, String nomeTecnico, AtividadeTecnicoEnum cargo, AtividadeEquipaEntities equipa, long id_Equipa) {
+    public AtividadeTecnicoEntities(long idTecnico, String nomeTecnico, AtividadeTecnicoEnum cargo, AtividadeEquipaEntities equipa, long idequipa) {
         this.idTecnico = idTecnico;
         this.nomeTecnico = nomeTecnico;
         this.cargo = cargo;
         this.equipa = equipa;
-        this.id_Equipa = id_Equipa;
+        this.idequipa = idequipa;
     }
 
     public AtividadeTecnicoEntities(String nomeTecnico, AtividadeTecnicoEnum cargo, AtividadeEquipaEntities equipa) {
@@ -36,11 +36,11 @@ public class AtividadeTecnicoEntities {
         this.equipa = equipa;
     }
 
-    public AtividadeTecnicoEntities(String nomeTecnico, AtividadeTecnicoEnum cargo, AtividadeEquipaEntities equipa, long id_Equipa) {
+    public AtividadeTecnicoEntities(String nomeTecnico, AtividadeTecnicoEnum cargo, AtividadeEquipaEntities equipa, long idequipa) {
         this.nomeTecnico = nomeTecnico;
         this.cargo = cargo;
         this.equipa = equipa;
-        this.id_Equipa = id_Equipa;
+        this.idequipa = idequipa;
     }
 
     public long getIdTecnico() {
@@ -75,11 +75,11 @@ public class AtividadeTecnicoEntities {
         this.equipa = equipa;
     }
 
-    public long getId_Equipa() {
-        return id_Equipa;
+    public long getIdequipa() {
+        return idequipa;
     }
 
-    public void setId_Equipa(long id_Equipa) {
-        this.id_Equipa = id_Equipa;
+    public void setIdequipa(long idequipa) {
+        this.idequipa = idequipa;
     }
 }

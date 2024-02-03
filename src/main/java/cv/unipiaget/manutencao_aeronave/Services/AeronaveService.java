@@ -31,6 +31,9 @@ public class AeronaveService {
         }
         return aeronave.get();
     }
+    public AeronaveEntity getAeronaveByMatricula(String matricula) {
+        return aeronaveRepository.findByMatricula(matricula);
+    }
 
     public AeronaveEntity updateAeronave(AeronaveEntity aeronave) {return aeronaveRepository.save(aeronave);}
 

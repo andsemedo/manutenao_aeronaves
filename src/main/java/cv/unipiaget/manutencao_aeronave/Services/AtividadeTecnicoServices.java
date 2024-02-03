@@ -44,6 +44,9 @@ public class AtividadeTecnicoServices {
         return tecnico.get();
     }
 
+    public List<AtividadeTecnicoEntities> getAllTecnicoByEquipa(Long id) {
+        return atividadeTecnicoRepository.findByIdequipa(id);
+    }
 
 //-------------------------------------------------
 //Update Tecnico

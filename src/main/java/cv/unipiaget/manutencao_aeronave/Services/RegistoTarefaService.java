@@ -32,6 +32,14 @@ public class RegistoTarefaService {
         return registoTarefa.get();
     }
 
+    public List<RegistoTarefaEntity> getAllRegistoTarefaByManutencaoId(Long id) {
+        return registoTarefaRepository.findByAtividadeManutencao(id);
+    }
+
+    public List<RegistoTarefaEntity> getAllRegistoTarefaByEquipaId(Long id) {
+        return registoTarefaRepository.findByIdequipa(id);
+    }
+
     public RegistoTarefaEntity addNewRegistoTarefa(RegistoTarefaEntity tarefa) {
         return registoTarefaRepository.save(tarefa);
     }

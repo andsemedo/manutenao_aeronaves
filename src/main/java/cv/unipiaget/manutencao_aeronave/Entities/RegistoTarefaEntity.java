@@ -28,7 +28,7 @@ public class RegistoTarefaEntity {
     @ManyToOne()
     @JoinColumn(name = "id_equipa", insertable = false, updatable = false)
     private AtividadeEquipaEntities equipa;
-    private Long id_equipa;
+    private Long idequipa;
 
     @OneToMany(mappedBy = "registoTarefa")
     private List<UsoPecaEntity> usoPeca;
@@ -36,23 +36,23 @@ public class RegistoTarefaEntity {
     public RegistoTarefaEntity() {
     }
 
-    public RegistoTarefaEntity(LocalDate data_execucao, String comentario, AtividadeManutencaoEntity manutencao, Long atividadeManutencao, AtividadeEquipaEntities equipa, Long id_equipa) {
+    public RegistoTarefaEntity(LocalDate data_execucao, String comentario, AtividadeManutencaoEntity manutencao, Long atividadeManutencao, AtividadeEquipaEntities equipa, Long idequipa) {
         this.data_execucao = data_execucao;
         this.comentario = comentario;
         this.manutencao = manutencao;
         this.atividadeManutencao = atividadeManutencao;
         this.equipa = equipa;
-        this.id_equipa = id_equipa;
+        this.idequipa = idequipa;
     }
 
-    public RegistoTarefaEntity(Long registotarefaid, LocalDate data_execucao, String comentario, AtividadeManutencaoEntity manutencao, Long atividadeManutencao, AtividadeEquipaEntities equipa, Long id_equipa) {
+    public RegistoTarefaEntity(Long registotarefaid, LocalDate data_execucao, String comentario, AtividadeManutencaoEntity manutencao, Long atividadeManutencao, AtividadeEquipaEntities equipa, Long idequipa) {
         this.registotarefaid = registotarefaid;
         this.data_execucao = data_execucao;
         this.comentario = comentario;
         this.manutencao = manutencao;
         this.atividadeManutencao = atividadeManutencao;
         this.equipa = equipa;
-        this.id_equipa = id_equipa;
+        this.idequipa = idequipa;
     }
 
     public RegistoTarefaEntity(long registotarefaid, String s, String reparação_no_motor_esquerdo, AtividadeManutencaoEntity manutencao, Long manutencaoid, AtividadeEquipaEntities equipa, long idEquipa) {
@@ -90,12 +90,12 @@ public class RegistoTarefaEntity {
         this.atividadeManutencao = atividadeManutencao;
     }
 
-    public Long getId_equipa() {
-        return id_equipa;
+    public Long getIdequipa() {
+        return idequipa;
     }
 
-    public void setId_equipa(Long id_equipa) {
-        this.id_equipa = id_equipa;
+    public void setIdequipa(Long idequipa) {
+        this.idequipa = idequipa;
     }
 
     public AtividadeManutencaoEntity getManutencao() {

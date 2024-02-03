@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
@@ -73,6 +72,24 @@ public class RegistoTarefaServiceTest {
         RegistoTarefaEntity tarefaEntity = service.getRegistoTarefaById(tarefa.getRegistotarefaid());
         assertEquals(Optional.ofNullable(tarefa).get(), tarefaEntity);
         verify(repository).findById(tarefa.getRegistotarefaid());
+        verifyNoMoreInteractions(repository);
+    }
+
+    @Test
+    void deveObterRegistoTarefaPorManutencaoId() {
+        when(repository.findByAtividadeManutencao(manutencao.getManutencaoid())).thenReturn(Arrays.asList(tarefa, tarefa1));
+        List<RegistoTarefaEntity> tarefaEntity = service.getAllRegistoTarefaByManutencaoId(manutencao.getManutencaoid());
+        assertEquals(2, tarefaEntity.size());
+        verify(repository).findByAtividadeManutencao(manutencao.getManutencaoid());
+        verifyNoMoreInteractions(repository);
+    }
+
+    @Test
+    void deveObterRegistoTarefaPorIdEquipa() {
+        when(repository.findByIdequipa(equipa.getIdEquipa())).thenReturn(Arrays.asList(tarefa, tarefa1));
+        List<RegistoTarefaEntity> tarefaEntity = service.getAllRegistoTarefaByEquipaId(equipa.getIdEquipa());
+        assertEquals(2, tarefaEntity.size());
+        verify(repository).findByIdequipa(equipa.getIdEquipa());
         verifyNoMoreInteractions(repository);
     }
 
