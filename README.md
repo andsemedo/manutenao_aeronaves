@@ -51,14 +51,16 @@ operacional.
 * Listar o historico de manutenções de uma aeronave - GET - http://localhost:8080/api/manutencao/atividade/aeronave/{id}/historico
 * Deleta uma manutenção - DELETE - http://localhost:8080/api/manutencao/atividade/{id}
 * Adiciona uma nova manutenção - POST - http://localhost:8080/api/manutencao/atividade/
->** Tipo Manutencao **
+><pre><strong>Tipo Manutencao</strong>
 > * preventiva
 > * corretiva,
 > * emergencial
->** Status Manutencao **
+></pre>
+><pre><strong>Status Manutencao</strong>
 > * pendente
 > * emProgresso,
 > * concluido
+></pre>
 ><pre><strong>Request body</strong>
 >  {
 >    "manutencaoid": 0,
