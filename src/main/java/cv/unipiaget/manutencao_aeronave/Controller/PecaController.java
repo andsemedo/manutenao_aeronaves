@@ -55,12 +55,36 @@ public class PecaController {
 
     @Operation(description = "Endpoint que regista uma peça")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "retorna registado, retorna a peça")
+            @ApiResponse(responseCode = "201", description = "peça registado, retorna a peça"),
+            @ApiResponse(responseCode = "500", description = "Quantidade negativo")
     })
     @PostMapping
-    public ResponseEntity<PecaEntity> salvarPeca(@RequestBody PecaEntity peca) {
+    public ResponseEntity<Object> salvarPeca(@RequestBody PecaEntity peca) {
+        if (peca.getQuantidade() < 0) return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Quantidade não pode ser negativo");
         PecaEntity pecaSalva = pecaService.salvarPeca(peca);
-        return ResponseEntity.ok(pecaSalva);
+        return ResponseEntity.status(HttpStatus.CREATED).body(pecaSalva);
+    }
+
+    @Operation(description = "Endpoint que atualiza uma peça")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "peça atualizado, retorna a peça"),
+            @ApiResponse(responseCode = "404", description = "Peça não encontrada"),
+            @ApiResponse(responseCode = "500", description = "Quantidade negativo")
+    })
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> atualizarPeca(@PathVariable("id") int id, @RequestBody PecaEntity pecaEntity) {
+        Optional<PecaEntity> peca = pecaService.obterPecaPorId(id);
+        if (peca.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Peça não encontrada");
+
+        if (pecaEntity.getQuantidade() < 0) return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body("Quantidade não pode ser negativo");
+
+        peca.get().setNome(pecaEntity.getNome());
+        peca.get().setQuantidade(pecaEntity.getQuantidade());
+
+        return ResponseEntity.status(HttpStatus.OK).body(pecaService.atualizarPeca(peca.get()));
+
     }
 
     @Operation(description = "Endpoint que deleta uma peça")
