@@ -14,7 +14,7 @@ operacional.
 # ERD do Subsistema <h5>
 ![ERD Manutenção Aeronave](https://github.com/andsemedo/manutenao_aeronaves/assets/84507074/d8b81ccd-4c42-4790-89d4-8a798de79562)
 
-#Configurção e Execução da Aplicação <h5>
+# Configurção e Execução da Aplicação <h5>
 **Pré-requesito: Ter o **Docker** instalado
 
 >**Recomendação caso estiver rodando a aplicação pela 1ª vez**
