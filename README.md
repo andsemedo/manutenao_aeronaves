@@ -15,7 +15,7 @@ operacional.
 ![ERD Manutenção Aeronave](https://github.com/andsemedo/manutenao_aeronaves/assets/84507074/d8b81ccd-4c42-4790-89d4-8a798de79562)
 
 # Configurção e Execução da Aplicação <h5>
-**Pré-requesito: Ter o **Docker** instalado
+**Pré-requesito: Ter o **Docker** instalado**
 
 >**Recomendação caso estiver rodando a aplicação pela 1ª vez**
 >Caso estiver rodando a aplicação pela 1ª vez é recomendado ter a lista das aeronaves para o GestaoVooSimulate.
@@ -28,5 +28,8 @@ operacional.
 >4. Depois, dê docker-compose up
 >5. Quando todos os conteiner já forem executados com sucesso, inclusive o da aplicação
 >6. Comente o codigo que descomentaste anteriormente, para não dar conflito de atributos unicos da base de dados quando for executar a aplicação novamente
+
+# Documentação da API <h6>
+**Aceder:** <http://localhost:8080/swagger-ui/index.html>
 
 
