@@ -42,12 +42,27 @@ public class AtividadeManutencaoController {
 
     @Operation(description = "Endpoint para listar todas as manutenções")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "aeronave deletado com sucesso"),
-            @ApiResponse(responseCode = "404", description = "Aeronave não encontrada")
+            @ApiResponse(responseCode = "200", description = "retorna uma lista de manutenções"),
+            @ApiResponse(responseCode = "404", description = "Nenhuma manutenção encontrada")
     })
     @GetMapping
-    public List<AtividadeManutencaoEntity> getAllManutencao() {
-        return atividadeManutencaoService.getAllManutencao();
+    public ResponseEntity<Object> getAllManutencao() {
+        List<AtividadeManutencaoEntity> manutencaoList = atividadeManutencaoService.getAllManutencao().stream()
+                .map(man -> {
+                    AtividadeManutencaoEntity manutencao = new AtividadeManutencaoEntity(
+                            man.getManutencaoid(),
+                            man.getTipoManutencao(),
+                            man.getDescricao(),
+                            man.getStatusManutencao(),
+                            man.getData()
+                    );
+                    return manutencao;
+                })
+                .collect(Collectors.toList());
+
+        if (manutencaoList.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nenhuma manutenção encontrada");
+
+        return ResponseEntity.status(HttpStatus.OK).body(manutencaoList);
     }
 
     @Operation(description = "Endpoint para retornar manutenção por id")

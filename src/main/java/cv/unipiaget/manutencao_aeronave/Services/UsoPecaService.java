@@ -21,6 +21,7 @@ public class UsoPecaService {
     public List<UsoPecaEntity> getAllUsoPeca() {return usoPecaRepository.findAll();}
 
     public UsoPecaEntity getUsoPecaById(Long id) {return usoPecaRepository.findById(id).get();}
+    public List<UsoPecaEntity> getAllUsoPecaByTarefa(Long id) {return usoPecaRepository.findByTarefaId(id);}
 
     public UsoPecaEntity addNewUsoPeca(UsoPecaEntity usoPecaEntity) {return usoPecaRepository.save(usoPecaEntity);}
 
