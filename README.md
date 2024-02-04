@@ -30,11 +30,11 @@ operacional.
 >6. Comente o codigo que descomentaste anteriormente, para não dar conflito de atributos unicos da base de dados quando for executar a aplicação novamente
 
 # Endpoints <h6>
->**Uso-Peca-Controller**
->Retorna todos os uso-peças - GET - http://localhost:8080/api/manutencao/usopeca
->Retorna um uso peça por id - GET - http://localhost:8080/api/manutencao/usopeca/{id}
->Deleta um uso peça - DELETE - http://localhost:8080/api/manutencao/usopeca/{id}
->Atualiza a quantidade de peça no uso peça - PUT -
+**Uso-Peca-Controller**
+* Retorna todos os uso-peças - GET - http://localhost:8080/api/manutencao/usopeca
+* Retorna um uso peça por id - GET - http://localhost:8080/api/manutencao/usopeca/{id}
+* Deleta um uso peça - DELETE - http://localhost:8080/api/manutencao/usopeca/{id}
+* Atualiza a quantidade de peça no uso peça - PUT - http://localhost:8080/api/manutencao/usopeca/{id}
 ><pre><strong>Request body</strong>
 >  {
 >  "quantidade": integer($int32)
