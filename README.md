@@ -29,6 +29,96 @@ operacional.
 >5. Quando todos os conteiner já forem executados com sucesso, inclusive o da aplicação
 >6. Comente o codigo que descomentaste anteriormente, para não dar conflito de atributos unicos da base de dados quando for executar a aplicação novamente
 
+# Endpoints <h6>
+**Aeronave-Controller**
+* Retorna todas as aeronaves - GET - http://localhost:8080/api/manutencao/aeronave
+* Retorna uma aeronave pelo id - GET - http://localhost:8080/api/manutencao/aeronave/id/{id}
+* Retorna uma aeronave pela matricula - GET - http://localhost:8080/api/manutencao/aeronave/matricula/{matricula}
+* Deleta uma aeronave - DELETE - http://localhost:8080/api/manutencao/aeronave/{id}
+* Adiciona uma nova aeronave - POST - http://localhost:8080/api/manutencao/aeronave
+><pre><strong>Request body</strong>
+>  {
+>    "matricula": "string",
+>    "modelo": "string",
+>    "ano_fabrico": 2024,
+>    "capacidade": 0
+>  }
+></pre>
+
+**Atividade-Manutencao-Controller**
+* Listar todas as manutenções - GET - http://localhost:8080/api/manutencao/atividade/
+* Retorna uma manutenção pelo id - GET - http://localhost:8080/api/manutencao/atividade/{id}
+* Listar o historico de manutenções de uma aeronave - GET - http://localhost:8080/api/manutencao/atividade/aeronave/{id}/historico
+* Deleta uma manutenção - DELETE - http://localhost:8080/api/manutencao/atividade/{id}
+* Adiciona uma nova manutenção - POST - http://localhost:8080/api/manutencao/atividade/
+><pre><strong>Tipo Manutencao</strong>
+><ul>
+><li>preventiva</li>
+><li>corretiva</li>
+><li>emergencial</li>
+></ul>
+></pre>
+><pre><strong>Status Manutencao</strong>
+><ul>
+><li>pendente</li>
+><li>emProgresso</li>
+><li>concluido</li>
+></ul>ul>
+></pre>
+><pre><strong>Request body</strong>
+>  {
+>    "manutencaoid": 0,
+>    "tipoManutencao": "preventiva",
+>    "descricao": "string",
+>    "statusManutencao": "pendente",
+>    "aeronaveid": 0,  
+>    "data": "2024-02-04",
+>  }
+></pre>
+* Atualizar apenas o status e a descrição de uma manutenção - PUT - http://localhost:8080/api/manutencao/atividade/{id}
+><pre><strong>Request body</strong>
+>  {
+>    "descricao": "string",
+>    "statusManutencao": "pendente",
+>  }
+></pre>
+
+**Atividade-Manutencao-Controller**
+* Listar todas as manutenções - GET - http://localhost:8080/api/manutencao/atividade/
+* Retorna uma manutenção pelo id - GET - http://localhost:8080/api/manutencao/atividade/{id}
+* Listar o historico de manutenções de uma aeronave - GET - http://localhost:8080/api/manutencao/atividade/aeronave/{id}/historico
+* Deleta uma manutenção - DELETE - http://localhost:8080/api/manutencao/atividade/{id}
+* Adiciona uma nova manutenção - POST - http://localhost:8080/api/manutencao/atividade/
+><pre><strong>Request body</strong>
+>  {
+>    "manutencaoid": 0,
+>    "tipoManutencao": "preventiva",
+>    "descricao": "string",
+>    "statusManutencao": "pendente",
+>    "aeronaveid": 0,  
+>    "data": "2024-02-04",
+>  }
+></pre>
+
+**Uso-Peca-Controller**
+* Retorna todos os uso-peças - GET - http://localhost:8080/api/manutencao/usopeca
+* Retorna um uso peça por id - GET - http://localhost:8080/api/manutencao/usopeca/{id}
+* Deleta um uso peça - DELETE - http://localhost:8080/api/manutencao/usopeca/{id}
+* Atualiza a quantidade de peça no uso peça - PUT - http://localhost:8080/api/manutencao/usopeca/{id}
+><pre><strong>Request body</strong>
+>  {
+>    "quantidade": 0
+>  }
+></pre>
+* Adiciona um novo uso peça - POST - http://localhost:8080/api/manutencao/usopeca
+><pre><strong>Request body</strong>
+>  {
+>    "tarefaId": 0,
+>    "pecaId": 0,
+>    "quantidade": 0
+>  }
+></pre>
+
 # Documentação da API <h6>
 **Aceder:** <http://localhost:8080/swagger-ui/index.html>
 
