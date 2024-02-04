@@ -35,10 +35,10 @@ operacional.
 >Retorna um uso peça por id - GET - http://localhost:8080/api/manutencao/usopeca/{id}
 >Deleta um uso peça - DELETE - http://localhost:8080/api/manutencao/usopeca/{id}
 >Atualiza a quantidade de peça no uso peça - PUT -
-><pre>**Request body**
+><pre><strong>Request body</strong>
 >  {
 >  "quantidade": integer($int32)
->}
+>  }
 ></pre>
 >Adiciona um
 
