@@ -1,5 +1,6 @@
 package cv.unipiaget.manutencao_aeronave.Services;
 
+import cv.unipiaget.manutencao_aeronave.Entities.EncomendaPecaEntity;
 import cv.unipiaget.manutencao_aeronave.Entities.PecaEntity;
 import cv.unipiaget.manutencao_aeronave.Repository.PecaRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -29,6 +31,7 @@ public class PecaServiceTest {
     PecaRepository repository;
 
     PecaEntity peca, peca1;
+    EncomendaPecaEntity encomendaPeca;
 
     @BeforeEach
     public void setUp() {
@@ -44,4 +47,33 @@ public class PecaServiceTest {
         verify(repository).findAll();
         verifyNoMoreInteractions(repository);
     }
+
+    @Test
+    void deveObterPecaPorId() {
+        when(repository.findById(peca.getId())).thenReturn(Optional.ofNullable(peca));
+        Optional<PecaEntity> pecaEntity = service.obterPecaPorId(peca.getId());
+        assertEquals(Optional.ofNullable(peca), pecaEntity);
+        verify(repository).findById(peca.getId());
+        verifyNoMoreInteractions(repository);
+    }
+
+    @Test
+    void deveRegistarUmaNovaPeca() {
+        when(repository.save(peca)).thenReturn(peca);
+        PecaEntity pecaEntity = service.salvarPeca(peca);
+        assertEquals(peca, pecaEntity);
+        verify(repository).save(peca);
+        verifyNoMoreInteractions(repository);
+    }
+
+    @Test
+    void deveAtualizarOEstoqueDaPeca() {
+        when(repository.save(peca)).thenReturn(peca);
+        PecaEntity pecaEntity = service.updateEstoque(peca);
+        assertEquals(peca, pecaEntity);
+        verify(repository).save(peca);
+        verifyNoMoreInteractions(repository);
+    }
+
+
 }
