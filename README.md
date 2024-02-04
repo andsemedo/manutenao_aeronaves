@@ -29,6 +29,9 @@ operacional.
 >5. Quando todos os conteiner já forem executados com sucesso, inclusive o da aplicação
 >6. Comente o codigo que descomentaste anteriormente, para não dar conflito de atributos unicos da base de dados quando for executar a aplicação novamente
 
+**Execução**
+1. docker compose build --no-cache
+2. docker compose up
 
 # Endpoints <h6>
 **Aeronave-Controller**
@@ -216,12 +219,6 @@ operacional.
 ></pre>
 
 # Documentação da API com o SpringDoc OPEN API <h6>
-
-**Execução**
-1. docker compose build --no-cache
-2. docker compose up
-
-# Documentação da API <h6>
 **Aceder:** <http://localhost:8080/swagger-ui/index.html>
 
 
