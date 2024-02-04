@@ -51,6 +51,38 @@ operacional.
 * Listar o historico de manutenções de uma aeronave - GET - http://localhost:8080/api/manutencao/atividade/aeronave/{id}/historico
 * Deleta uma manutenção - DELETE - http://localhost:8080/api/manutencao/atividade/{id}
 * Adiciona uma nova manutenção - POST - http://localhost:8080/api/manutencao/atividade/
+>** Tipo Manutencao **
+> * preventiva
+> * corretiva,
+> * emergencial
+>** Status Manutencao **
+> * pendente
+> * emProgresso,
+> * concluido
+><pre><strong>Request body</strong>
+>  {
+>    "manutencaoid": 0,
+>    "tipoManutencao": "preventiva",
+>    "descricao": "string",
+>    "statusManutencao": "pendente",
+>    "aeronaveid": 0,  
+>    "data": "2024-02-04",
+>  }
+></pre>
+* Atualizar apenas o status e a descrição de uma manutenção - PUT - http://localhost:8080/api/manutencao/atividade/{id}
+><pre><strong>Request body</strong>
+>  {
+>    "descricao": "string",
+>    "statusManutencao": "pendente",
+>  }
+></pre>
+
+**Atividade-Manutencao-Controller**
+* Listar todas as manutenções - GET - http://localhost:8080/api/manutencao/atividade/
+* Retorna uma manutenção pelo id - GET - http://localhost:8080/api/manutencao/atividade/{id}
+* Listar o historico de manutenções de uma aeronave - GET - http://localhost:8080/api/manutencao/atividade/aeronave/{id}/historico
+* Deleta uma manutenção - DELETE - http://localhost:8080/api/manutencao/atividade/{id}
+* Adiciona uma nova manutenção - POST - http://localhost:8080/api/manutencao/atividade/
 ><pre><strong>Request body</strong>
 >  {
 >    "manutencaoid": 0,
