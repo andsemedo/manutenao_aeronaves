@@ -1,10 +1,10 @@
 package cv.unipiaget.manutencao_aeronave.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import cv.unipiaget.manutencao_aeronave.Enums.EncomendaStatus;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * @Silvino Gomes
@@ -15,19 +15,41 @@ import java.util.Date;
 @Table(name = "tbl_encomenda_pecas")
 public class EncomendaPecaEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_encomendaPeca;
+    @NotNull(message = "Campo quantidade é obrigatorio")
     private int quantidade;
-    private Date data_encomenda;
-    private String status;
-    private int id_peca;
+    @NotNull(message = "Campo data_encomenda é obrigatorio")
+    private LocalDate dataEncomenda;
+    @NotNull(message = "Campo status é obrigatorio")
+    private EncomendaStatus status;
 
+    @ManyToOne()
+    @JoinColumn(name = "encomendaPecaId")
+    private PecaEntity peca;
+    @NotNull(message = "Id de peca é obrigatorio")
+    private int idPeca;
 
-    public EncomendaPecaEntity(int id_encomendaPeca, int quantidade, Date data_encomenda, String status, int id_peca) {
+    public EncomendaPecaEntity() {
+    }
+
+    public EncomendaPecaEntity(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public EncomendaPecaEntity(int quantidade, LocalDate dataEncomenda, EncomendaStatus status, PecaEntity peca) {
+        this.quantidade = quantidade;
+        this.dataEncomenda = dataEncomenda;
+        this.status = status;
+        this.peca = peca;
+    }
+
+    public EncomendaPecaEntity(int id_encomendaPeca, int quantidade, LocalDate dataEncomenda, EncomendaStatus status, int idPeca) {
         this.id_encomendaPeca = id_encomendaPeca;
         this.quantidade = quantidade;
-        this.data_encomenda = data_encomenda;
+        this.dataEncomenda = dataEncomenda;
         this.status = status;
-        this.id_peca = id_peca;
+        this.idPeca = idPeca;
     }
 
 
@@ -48,27 +70,27 @@ public class EncomendaPecaEntity {
         this.quantidade = quantidade;
     }
 
-    public Date getDataEncomenda() {
-        return data_encomenda;
+    public LocalDate getDataEncomenda() {
+        return dataEncomenda;
     }
 
-    public void setDataEncomenda(Date data_encomenda) {
-        this.data_encomenda = data_encomenda;
+    public void setDataEncomenda(LocalDate data_encomenda) {
+        this.dataEncomenda = data_encomenda;
     }
 
-    public String getStatus() {
+    public EncomendaStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(EncomendaStatus status) {
         this.status = status;
     }
 
     public int getIdPeca() {
-        return id_peca;
+        return idPeca;
     }
 
     public void setIdPeca(int id_peca) {
-        this.id_peca = id_peca;
+        this.idPeca = id_peca;
     }
 }

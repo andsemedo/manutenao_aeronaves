@@ -20,12 +20,12 @@ public class GestaoVooMockService {
         this.webClient = webClientBuilder.baseUrl("http://localhost:8080").build();
     }
 
-    public Boolean verificarDisponibilidade(int idAeronave) {
+    public Boolean verificarDisponibilidade(String matricula) {
         // Simulando a chamada à API para verificar a disponibilidade
 
         try {
             ResponseEntity<Boolean> response = webClient.get()
-                    .uri("/api/voos/aeronave/disponibilidade/{id}", idAeronave)
+                    .uri("/api/voos/aeronave/disponibilidade/{matricula}", matricula)
                     .retrieve()
                     .toEntity(Boolean.class)
                     .block();

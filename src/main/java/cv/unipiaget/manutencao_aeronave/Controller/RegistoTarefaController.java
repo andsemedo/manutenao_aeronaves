@@ -55,10 +55,13 @@ public class RegistoTarefaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Atividade manutenção não encontrada");
         }
         //verificar se a equipa existe
-        Optional<AtividadeEquipaEntities> equipa = equipaService.getEquipaById(tarefa.getId_equipa());
+        Optional<AtividadeEquipaEntities> equipa = equipaService.getEquipaById(tarefa.getIdequipa());
         if (equipa.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Equipa não encontrada");
         }
+
+        tarefa.setManutencao(manutencao);
+        tarefa.setEquipa(equipa.get());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(registoTarefaService.addNewRegistoTarefa(tarefa));
 
@@ -73,11 +76,11 @@ public class RegistoTarefaController {
         tarefa.setData_execucao(tarefaEntity.getData_execucao());
         tarefa.setComentario(tarefaEntity.getComentario());
         //ver se a equipa existe
-        Optional<AtividadeEquipaEntities> equipa = equipaService.getEquipaById(tarefa.getId_equipa());
+        Optional<AtividadeEquipaEntities> equipa = equipaService.getEquipaById(tarefa.getIdequipa());
         if (equipa.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Equipa não encontrada");
         }
-        tarefa.setId_equipa(tarefaEntity.getId_equipa());
+        tarefa.setIdequipa(tarefaEntity.getIdequipa());
 
         return ResponseEntity.status(HttpStatus.OK).body(registoTarefaService.updateRegistoTarefa(tarefa));
     }

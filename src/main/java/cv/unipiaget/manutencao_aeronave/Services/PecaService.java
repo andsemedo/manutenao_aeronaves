@@ -35,6 +35,8 @@ public class PecaService {
         return pecaRepository.save(peca);
     }
 
+    public PecaEntity updateEstoque(PecaEntity peca) {return pecaRepository.save(peca);}
+
     public void excluirPeca(int id) {
         pecaRepository.deleteById(id);
     }

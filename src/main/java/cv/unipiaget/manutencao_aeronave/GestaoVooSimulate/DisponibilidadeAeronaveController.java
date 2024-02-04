@@ -14,21 +14,22 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(path = "/api/voos/aeronave")
-public class AeronaveController {
+public class DisponibilidadeAeronaveController {
 
-    private final AeronaveService aeronaveService;
+    private final DisponibilidadeAeronaveService aeronaveService;
 
-    public AeronaveController(AeronaveService aeronaveService) {
+    public DisponibilidadeAeronaveController(DisponibilidadeAeronaveService aeronaveService) {
         this.aeronaveService = aeronaveService;
     }
 
     @GetMapping
-    public List<AeronaveEntity> getAllAeronave() {
+    public List<DisponibilidadeAeronaveEntity> getAllAeronave() {
         return aeronaveService.getAllAeronaves();
     }
 
-    @GetMapping("/disponibilidade/{id}")
-    public ResponseEntity<Object> verificarDisponibilidade(@PathVariable(value = "id") Long idAeronave) {
-        return aeronaveService.verificarDisponibilidade(idAeronave);
+    @GetMapping("/disponibilidade/{matricula}")
+    public ResponseEntity<Object> verificarDisponibilidade(@PathVariable(value = "matricula") String matricula) {
+        return aeronaveService.verificarDisponibilidade(matricula);
     }
+
 }
