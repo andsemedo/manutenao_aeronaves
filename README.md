@@ -214,7 +214,7 @@ operacional.
 >  }
 ></pre>
 
-# Documentação da API <h6>
+# Documentação da API com o SpringDoc OPEN API <h6>
 **Aceder:** <http://localhost:8080/swagger-ui/index.html>
 
 
