@@ -52,14 +52,18 @@ operacional.
 * Deleta uma manutenção - DELETE - http://localhost:8080/api/manutencao/atividade/{id}
 * Adiciona uma nova manutenção - POST - http://localhost:8080/api/manutencao/atividade/
 ><pre><strong>Tipo Manutencao</strong>
-> * preventiva
-> * corretiva,
-> * emergencial
+><ul>
+><li>preventiva</li>
+><li>corretiva</li>
+><li>emergencial</li>
+></ul>
 ></pre>
 ><pre><strong>Status Manutencao</strong>
-> * pendente
-> * emProgresso,
-> * concluido
+><ul>
+><li>pendente</li>
+><li>emProgresso</li>
+><li>concluido</li>
+></ul>ul>
 ></pre>
 ><pre><strong>Request body</strong>
 >  {
