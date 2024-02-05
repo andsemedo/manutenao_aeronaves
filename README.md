@@ -33,6 +33,9 @@ operacional.
 1. docker compose build --no-cache
 2. docker compose up
 
+** Pgadmin **
+** Aceder: ** http://localhost:8172/browser/
+
 # Endpoints <h6>
 **Aeronave-Controller**
 * Retorna todas as aeronaves - GET - http://localhost:8080/api/manutencao/aeronave
